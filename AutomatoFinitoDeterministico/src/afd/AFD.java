@@ -45,6 +45,14 @@ e0 --->>> q0 Estado Inicial
 e0,e1 --->>> F Conjunto de estados Finais
  * 
  * */
+
+/*Conteúdo do arquivo entradaAutomato.txt
+a,b
+e0,e1
+e0,a=e0:e0,b=e1:e1,b=e1
+e0
+e0,e1
+*/
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
