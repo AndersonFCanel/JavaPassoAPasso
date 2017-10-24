@@ -107,24 +107,25 @@ public class AFD {
 				
 				if(VerificaPalavra(palavra,alf)){
 					boolean flag = false; //flag serve para controlar  que determinarao em que condição a abertura das janelas aceito e naõ aceito deve ocorrer.
+					
 					for(int x = 0 ; x <palavra.length() ; x++){ //para x =0 até x < que tamanho da palavra inserida na janela
 						String l = ""+palavra.charAt(x); //String l recebe palavra vazia ""+ o caracter referente ao valor de   x no laco for.
 						int monitora = 0; // monitora serve para:   CONTINUAR A COMENTAR DAQUI,,, PAREI AQUI!!!
 						for(int y = 0 ; y <ED.length ; y++){
-							if(l .equals(EA[y]) && EI .equals(EP[y])){
+							if(l .equals(EA[y]) && EI .equals(EP[y])){ /**/
 								EI = ED[y];
 								monitora++; 
 							}
 						}
-						if(monitora == 0){
+						if(monitora == 0){//Se nenhuma das vezes os if acima for verdadeiro então
 							flag = true;
-							break;
+							break; // Interrompe o laco aqui.
 						}
 					}
 					
-					if(flag){
+					if(flag){/*Caso tenha sido atendida a condição do if anterior será impresso*/
 						JOptionPane.showMessageDialog(null,"Palavra não pertence ao alfabeto!");
-					}else{
+					}else{/*Caso não tenha sido atendida sera feita uma nova verificacao. */
 						PalavraAceita(EI,estFin); // Verifica se o estado final pertence a um dos estados finais
 					}
 					
@@ -135,12 +136,13 @@ public class AFD {
 				
 			}
 			
-		}catch(Exception e){
-			System.out.println("Erro:"+e);
+		}catch(Exception e){//Caso aja uma exception
+			System.out.println("Erro:"+e); //Imprimir erro no console.
 		}
 
 	}
-
+//--------------------METODOS---------------------------
+	
 	private static boolean VerificaPalavra(String palavra, String [] alf) {
 		
 		int cont = 0;
