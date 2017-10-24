@@ -72,11 +72,11 @@ public class AFD {
 			BufferedReader br = new BufferedReader(fr);//Objeto fr passado como parametro para o contrutor da classe BufferedReader
 			//bufferedreader serve pra ler de entrada de dados, desde teclado, passando por arquivos e até sockets...
 			
-			String alfabeto = br.readLine();//.readLine serve para Ler Strings digitadas.
-			String estados = br.readLine();
-			String funcaoPrograma = br.readLine();
-			String estadoInicial = br.readLine();
-			String estadosFinais = br.readLine();
+			String alfabeto = br.readLine();//.readLine serve para Ler Strings digitadas. Leu a,b
+			String estados = br.readLine();//Leu e0,e1
+			String funcaoPrograma = br.readLine();//Leu e0,a=e0:e0,b=e1:e1,b=e1
+			String estadoInicial = br.readLine();//Leu e0
+			String estadosFinais = br.readLine();// Leu e0,e1
 			
 			String [] alf = DividirEConquistar(alfabeto); // Array alf recebe os caracteres separados a,b
 			String [] est = DividirEConquistar(estados); //Array est recebe os dois estados possiveis e0,e1
@@ -90,7 +90,7 @@ public class AFD {
 			String [] EP = new String[funcaoPro.length];//Estado de Partida
 			String [] EA = new String[funcaoPro.length];//Estado de Alfabetos
 			
-			//CONTINUAR A COMENTAR DAQUI!!!!!!
+			//LAÇOS PARA TRATAR OS ESTADOS DE DESTINO, PARTIDA E ALFABETOS QUE ESTÃO CONTIDOS NA STRING funcaoPro
 			for(int i = 0;i<funcaoPro.length;i++){
 				String[] p1 = funcaoPro[i].split("=");
 				ED[i] = p1[1];
@@ -101,19 +101,19 @@ public class AFD {
 			
 			//Pegando entrada
 			while(true){
-				String EI = estadoInicial;
-				String palavra = null;
+				String EI = estadoInicial;//String EI recebe e0
+				String palavra = null;//String para armazenar o dado da janela JOptionPane
 				palavra = JOptionPane.showInputDialog("Informações--- \n\n Alfabeto: {"+alfabeto+"}\nEstados: {"+estados+"} \n\nEntre com uma palavra: ");
 				
 				if(VerificaPalavra(palavra,alf)){
-					boolean flag = false;
-					for(int x = 0 ; x <palavra.length() ; x++){
-						String l = ""+palavra.charAt(x);
-						int monitora = 0;
+					boolean flag = false; //flag serve para controlar  que determinarao em que condição a abertura das janelas aceito e naõ aceito deve ocorrer.
+					for(int x = 0 ; x <palavra.length() ; x++){ //para x =0 até x < que tamanho da palavra inserida na janela
+						String l = ""+palavra.charAt(x); //String l recebe palavra vazia ""+ o caracter referente ao valor de   x no laco for.
+						int monitora = 0; // monitora serve para:   CONTINUAR A COMENTAR DAQUI,,, PAREI AQUI!!!
 						for(int y = 0 ; y <ED.length ; y++){
 							if(l .equals(EA[y]) && EI .equals(EP[y])){
 								EI = ED[y];
-								monitora++;
+								monitora++; 
 							}
 						}
 						if(monitora == 0){
