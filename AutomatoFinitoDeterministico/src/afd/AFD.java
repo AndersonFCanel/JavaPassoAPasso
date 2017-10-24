@@ -5,9 +5,11 @@ Autômato Finito Determinístico - Código simples em JAVA IDE utilizado Eclipse
 
 O código exige que a entrada de teste seja feita da seguinte maneira:
 
-Dividiremos nossa entrada em 5 partes, conforme descreve a notação formal de um Autômato Finito, ou seja, M = (Q, Σ, δ, q0, F), onde temos:
+Dividiremos nossa entrada em 5 partes, conforme descreve a notação formal de um Autômato Finito, ou seja, M = (Q, Σ, δ, q0, F),
+onde temos:
 
-(Q) = um conjunto finito de estados (Σ) = um conjunto finito de símbolos de entrada chamado Alfabeto (δ : Q × Σ → Q) = uma função de transição (q0 ∈ Q) = um estado inicial (F ⊆ Q) = um conjunto de estados de aceitação ou conjunto de estados finais
+(Q) = um conjunto finito de estados (Σ) = um conjunto finito de símbolos de entrada chamado Alfabeto (δ : Q × Σ → Q) = uma função
+de transição (q0 ∈ Q) = um estado inicial (F ⊆ Q) = um conjunto de estados de aceitação ou conjunto de estados finais
 
 //Explicando a entrada:
 
