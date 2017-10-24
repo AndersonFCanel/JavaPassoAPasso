@@ -34,9 +34,10 @@ public class AFD {
 			// Leitura e separação do arquivo
 			
 			FileReader fr = new FileReader(file);
-			BufferedReader br = new BufferedReader(fr);
+			BufferedReader br = new BufferedReader(fr);//Objeto fr passado como parametro para o contrutor da classe BufferedReader
+			//bufferedreader serve pra ler de entrada de dados, desde teclado, passando por arquivos e até sockets...
 			
-			String alfabeto = br.readLine();
+			String alfabeto = br.readLine();//.readLine serve para Ler Strings digitadas.
 			String estados = br.readLine();
 			String funcaoPrograma = br.readLine();
 			String estadoInicial = br.readLine();
@@ -141,11 +142,17 @@ public class AFD {
 	}
 
 	private static String[] DivideTransicao(String valor) {
-		return valor.split(":");
+		return valor.split(":");//Divide a String quando ocorrer ":"
+	/*
+	Split – O Split é usado para dividir uma string em pequenos pedaços.
+	Para isso, seu método retorna um array de strings, contendo as respectivas partes,
+	definidas de acordo com a string passada como parâmetro, que na verdade funciona como 
+	o “agente” divisor da mesma.
+	*/
 	}
 
 	private static String[] DividirEConquistar(String valor) {
-		return valor.split(",");
+		return valor.split(",");//Divide a String quando ocorrer ","
 	}
 
 }
