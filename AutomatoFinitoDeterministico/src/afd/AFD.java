@@ -1,4 +1,5 @@
 package afd;
+//https://pt.wikipedia.org/wiki/Aut%C3%B4mato_finito_determin%C3%ADstico
 /*AFD
 
 Autômato Finito Determinístico - Código simples em JAVA IDE utilizado Eclipse Versão: Luna Service Release 1 (4.4.1)
