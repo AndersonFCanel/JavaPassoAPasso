@@ -1,0 +1,99 @@
+https://pt.wikipedia.org/wiki/Teoria_dos_aut%C3%B4matos
+
+Definição formal[editar | editar código-fonte]
+Autômatos
+Um autômato é representado formalmente por uma 5-tupla (Q,Σ,δ,q0,F), onde:
+Q é um conjunto finito de estados.
+Σ é um conjunto finito de símbolos, chamado de alfabeto do autômato.
+δ (ou g) é a função de transição, isto é, δ: Q x Σ → Q.
+q0 é o estado inicial, isto é, o estado do autômato antes de qualquer entrada ser processada, onde q0 ∈ Q.
+F é um conjunto de estados de Q (isto é, F ⊆ Q) chamado de estados de aceitação.
+Palavra de entrada
+Um autômato lê uma string finita de símbolos a1,a2,...., an, onde ai ∈ Σ, que é chamada de palavra de entrada. O conjunto de todas as palavras é denotado por Σ*.
+Execução
+A execução de um autômato sobre uma palavra de entrada w = a1,a2,...., an ∈ Σ*, é uma sequência de estados q1,q2,...., qn, onde qi ∈ Q tal que q0 é o estado inicial e qi = δ(qi-1,ai) para 0 < i ≤ n. Em outras palavras, no começo o autômato está no estado inicial q0, e então o autômato lê símbolos da palavra de entrada sequencialmente. Quando o autômato lê o símbolo ai ele pula para o estado qi = δ(qi-1,ai). Diz-se que qn é o estado final da execução.
+Palavra de aceitação
+Uma palavra w ∈ Σ* é aceita pelo autômato se qn ∈ F.
+Linguagem reconhecida
+Um autômato pode reconhecer uma linguagem. A linguagem L ⊆ Σ* reconhecida por um autômato é o conjunto de todas as palavras que são aceitas pelo autômato.
+Linguagens reconhecíveis
+As linguagens reconhecíveis são o conjunto de linguagens que são reconhecidas por algum autômato. Para a definição acima de autômatos, as linguagens reconhecíveis são linguagens regulares. Para diferentes definições de autômatos, a definição de linguagens reconhecíveis é diferente.
+Definições variantes de autômatos[editar | editar código-fonte]
+Autômatos são definidos para estudar máquinas úteis sobre formalismo matemático. Então, a definição de um autômato é aberta a variações de acordo com a “máquina do mundo real”, que nós queremos modelar usando o autômato. Há estudos das muitas variações de autômatos. A principal variante, descrita acima, é chamada de autômato finito determinístico. Seguem variações populares da definição dos diferentes componentes de autômatos.
+
+Entrada
+Entrada finita: Um autômato que aceita apenas sequências finitas de símbolos. A definição introdutória acima engloba apenas palavras finitas.
+Entrada infinita: Um autômato que aceita palavras infinitas (ω-palavras). Estes autômatos são chamados de ω-autômatos.
+Entrada palavra árvore: A entrada pode ser uma árvore de símbolos ao invés de uma sequência de símbolos. Neste caso, após ler cada símbolo, o autômato lê todos os símbolos sucessores na árvore de entrada. Diz-se que o autômato faz uma cópia dele mesmo para cada sucessor, e cada cópia executa um símbolo sucessor do estado de acordo com a relação de transição do autômato. Este autômato é chamado de autômato árvore.
+Entrada árvore infinita: As duas extensões acima podem ser combinadas, então o autômato lê uma estrutura de árvore com (in)finitos desvios. Este autômato é chamado de autômato árvore infinita.
+Estados
+Estados finitos: Um autômato que contém apenas um número finito de estados. A definição introdutória apenas descreve autômatos com números finitos de estados.
+Estados infinitos: Um autômato que pode não ter um número finito de estados, ou até mesmo um número contável de estados. Por exemplo, o autômato finito quantum ou autômato topológico tem um número infinito incontável de estados.
+Pilha de memória: Um autômato pode também conter uma memória extra no formato de pilha, em que símbolos podem ser colocados e retirados. Este tipo de autômato é chamado de Autômato Pushdown (Autômato com pilha).
+Função de transição
+Determinística: Para um dado estado atual e um símbolo de entrada, se um autômato pode pular para um estado apenas então ele é um autômato determinístico.
+Não-Determinismo: Um autômato que, após ler um símbolo de entrada, pode pular para qualquer estado, decidido por sua relação de transição. Note que o termo função de transição é substituído por relação de transição: O autômato não-determinísticamente decide pular para uma das opções permitidas. Este autômato é chamado de autômato não-determinístico.
+Alternamento: Esta ideia é muito semelhante ao autômato árvore, mas ortogonal. O autômato pode executar suas cópias múltiplas sobre o mesmo símbolo a ser lido. Este autômato é chamado de autômato finito alternado. A condição de aceitação deve satisfazer todas as execuções de tais cópias para aceitar a entrada.
+Condição de aceitação
+Aceitação de palavras finitas: Como descrito na definição informal acima.
+Aceitação de palavras infinitas: Um ω-autômato não pode ter estados finais, já que palavras infinitas nunca terminam. Preferencialmente, aceitação da palavra é decidida analisando as sequências infinitas dos estados visitados durante a execução.
+Aceitação probabilística: Um autômato não precisa estritamente aceitar ou rejeitar uma entrada. Ele pode aceitar a entrada com uma probabilidade entre zero e um. Por exemplo, autômato finito quantum, autômato geométrico e autômato métrico têm aceitação probabilística.
+Diferentes combinações das variações acima produzem mais classe de autômato.
+
+Teoria de Autômatos[editar | editar código-fonte]
+Teoria de autômatos é um assunto que estuda as propriedades de vários tipos de autômatos. Por exemplo, as questões a seguir são relacionadas a um dado tipo de autômatos.
+
+Qual classe de linguagens formais é reconhecível por algum tipo de autômato? (linguagens reconhecíveis)
+Certos autômatos são fechados sobre a união, interseção ou complemento de linguagens formais? (propriedades de fechamento)
+Quão expressivo é um tipo de autômato em termos de reconhecer classe de linguagens formais? E, quanto ao poder relativo de expressividade? (hierarquia de linguagem)
+Teoria dos autômatos também estuda se existe algum algoritmo efetivo ou não para resolver problemas semelhantes à seguinte lista:
+
+Um autômato aceita alguma palavra de entrada? (verificação de vazio – vacuidade)
+É possível transformar um dado autômato não-determinístico em um autômato determinístico sem mudar a linguagem reconhecível? (determinização)
+Para uma dada linguagem formal, qual é o menor autômato que a reconhece? (minimização).
+Classe de Autômatos[editar | editar código-fonte]
+Segue uma lista incompleta de tipos de autômatos.
+
+Autômatos	Linguagem reconhecível
+Autômatos finitos determinísticos(AFD)	Linguagens regulares
+Autômatos Finitos Não-determinísticos(AFN)	Linguagens regulares
+Autômatos Finitos Não-determinísticos com ε-transições (FND-ε or ε-AFN)	Linguagens regulares
+Autômato com Pilha (AP)	Linguagens livre de contexto
+Autômato linearmente limitado (ALL)	Linguagem sensível ao contexto
+Máquinas de Turing	Linguagem recursivamente enumerável
+Autômatos temporizado	
+Autômato de Büchi	Linguagens ω-limite
+Autômatos Não-determinístico de Büchi	Linguagens ω-regular
+Autômatos Não-determinístico/Determinístico de Rabin	Linguagens ω-regular
+Autômatos Não-determinístico/Determinístico de Street	Linguagens ω-regular
+Autômatos Não-determinístico/Determinístico de Paridade	Linguagens ω-regular
+Autômatos Não-determinístico/Determinístico de Muller	Linguagens ω-regular
+Autômatos discretos, contínuos e híbridos[editar | editar código-fonte]
+Geralmente teoria dos autômatos descreve os estados de máquinas abstratas, mas existem autômatos analógicos, contínuos ou híbridos (discreto-contínuo), que usam dados analógicos, tempo contínuo, ou ambos.
+
+Aplicações[editar | editar código-fonte]
+Cada modelo em teoria dos autômatos desempenha papéis importantes em muitas áreas aplicadas. Autômatos finitos são usados em processamento de texto, compiladores e projeto de hardware. Gramáticas livres de contexto (GLCs) são usadas em linguagens de programação e inteligência artificial. Originalmente, GLCs eram usadas no estudo de linguagens humanas. Autômatos celulares são usados no campo da biologia, o exemplo mais comum é o de Jogo da Vida de John Conway. Outros exemplos que podiam ser explicados usando teoria dos autômatos em biologia incluem crescimento de pinhas e molusco e padrões de pigmentação. Indo mais longe, uma teoria que sugere que todo o universo é computado por algum tipo de autômato discreto é defendida por cientistas. A idéia vem do trabalho de Konrad Zuse, e foi popularizada na América por Edward Fredkin.
+
+Simuladores de autômatos[editar | editar código-fonte]
+Simuladores de autômatos são ferramentas pedagógicas usadas para ensinar, aprender e pesquisar teoria dos autômatos. Um simulador de autômato tem como entrada a descrição de um autômato e então simula seu funcionamento para uma string arbitrária como entrada. A descrição do autômato pode ser inserida de várias formas. Um autômato pode ser definido por uma linguagem simbólica ou sua especificação pode ser inserida em uma forma predefinida ou seu diagrama de transição pode ser projetado no clicar e arrastar do mouse. Simuladores de autômatos bem conhecidos incluem Turing’s World, JFLAP, VAS, TAGS e SimStudio.[1]
+
+Conexão com a teoria das categorias[editar | editar código-fonte]
+Pode-se definir muitas categorias diferentes de autômatos[2] seguindo a classificação de autômatos em diferentes tipos, descrita na seção anterior. A categoria matemática dos autômatos determinísticos, máquinas sequenciais ou autômatos sequenciais, e máquinas de Turing com homomorfismos de autômatos, que define as setas entre autômatos é uma categoria fechada cartesiana,[3][4] que tem ambos, co-limites e limites categóricos. Um homomorfismo de autômato mapeia uma 5-tupla de um autômato Ai em uma 5-tupla de outro autômato Aj.[5] Homomorfismo de autômatos também pode ser considerado como transformações de autômatos ou homomorfismos semigrupo, quando o espaço do estado, S, do autômato é definido como um semigrupo Sg. Monoides são também considerados como um ambiente propício para autômatos em categorias monoides.[6][7][8]
+
+Categorias de autômatos variáveis
+Pode-se também definir um autômato variável, no sentido de Norbert Wiener em seu livro “Human Use of Human Beings” pelos endomorfismos Ai-->Ai. Então, pode-se mostrar que estes homomorfismos de autômatos variáveis formam um grupo matemático. No caso do não-determinístico, ou outros tipos complexos de autômatos, o último conjunto de endomorfismo pode tornar-se, contudo, um grupóide de autômato variável. Portanto, no caso mais geral, categorias de autômatos variáveis de qualquer tipo são categorias de grupóides ou categorias grupóides. Além disso, a categoria de autômatos reversíveis é então uma 2-categoria, e também uma subcategoria da 2-categoria de grupóides, ou a categoria grupóide.
+
+Referências[editar | editar código-fonte]
+John E. Hopcroft, Rajeev Motwani, Jeffrey D. Ullman – Introdução à Teoria de Autômatos, Linguagens e Computação (2ª Edição).
+
+Ir para cima ↑ Chakraborty, P., Saxena, P. C., Katti, C. P. 2011. Fifty Years of Automata Simulation: A Review. ACM Inroads, 2(4):59–70. http://dl.acm.org/citation.cfm?id=2038893&dl=ACM&coll=DL&CFID=65021406&CFTOKEN=86634854
+Ir para cima ↑ Jirí Adámek and Vera Trnková. 1990. Automata and Algebras in Categories. Kluwer Academic Publishers:Dordrecht and Prague
+Ir para cima ↑ S. Mac Lane, Categories for the Working Mathematician, Springer, New York (1971)
+Ir para cima ↑ http://planetmath.org/encyclopedia/CartesianClosedCategory.html Cartesian closed category
+Ir para cima ↑ http://planetmath.org/encyclopedia/SequentialMachine3.html The Category of Automata
+Ir para cima ↑ http://www.csee.wvu.edu/~jworthing/asl2010.pdf James Worthington.2010.Determinizing, Forgetting, and Automata in Monoidal Categories. ASL North American Annual Meeting,March 17, 2010
+Ir para cima ↑ Aguiar, M. and Mahajan, S.2010. "Monoidal Functors, Species, and Hopf Algebras".
+Ir para cima ↑ Meseguer, J., Montanari, U.: 1990 Petri nets are monoids. Information and Computation 88:105–155
+John E. Hopcroft, Rajeev Motwani, Jeffrey D. Ullman (2000). Introduction to Automata Theory, Languages, and Computation (2nd Edition). [S.l.]: Pearson Education. ISBN 0-201-44124-1
+Michael Sipser (1997). Introduction to the Theory of Computation. [S.l.]: PWS Publishing. ISBN 0-534-94728-X Part One: Automata and Languages, chapters 1–2, pp. 29–122. Section 4.1: Decidable Languages, pp. 152–159. Section 5.1: Undecidable Problems from Language Theory, pp. 172–183.
+James P. Schmeiser, David T. Barnard (1995). Producing a top-down parse order with bottom-up parsing. [S.l.]: Elsevier North-Holland
