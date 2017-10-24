@@ -1,5 +1,23 @@
 package afd;
 //https://pt.wikipedia.org/wiki/Aut%C3%B4mato_finito_determin%C3%ADstico
+
+/*Definição Formal[editar | editar código-fonte]
+Um Autômato Finito Determinístico A é uma 5-tuple (ou quíntupla), (Q, Σ, δ, q0, F) consistindo de:
+um conjunto finito de símbolos de entrada chamado Alfabeto (Σ)
+um conjunto finito de estados (Q)
+uma função de transição (δ : Q × Σ → Q)
+um estado inicial (q0 ∈ Q) e
+um conjunto de estados de aceitação (F ⊆ Q)
+Seja w = a1a2 ... an uma cadeia de símbolos sobre o alfabeto Σ, O autômato M aceita a cadeia w se somente se existe uma sequência de estados, r0,r1, ..., rn, em Q com as seguintes condições:
+r0 = q0
+ri+1 = δ(ri, ai+1), para i = 0, ..., n−1
+rn ∈ F.
+Em outras palavras, a primeira condição afirma que a máquina se inicia no estado inicial q0. A segunda condição diz que, dado cada símbolo da entrada w, a máquina transita de estado em estado de acordo com a função de transição δ. A terceira e última condição diz que a máquina aceita w se somente se o último símbolo da entrada leva o autômato a parar em um estado f tal que f ∈ F. Caso contrário, diz-se que a máquina rejeita a entrada. O conjunto de cadeias que M aceita é chamado Linguagem reconhecida por M e é simbolicamente representado por L(M).
+Um autômato finito determinístico que não possui estado inicial ou estados de aceitação é conhecido como um Sistema de Transições ou Semiautômato.
+Para uma melhor compreensão introdutória à definição formal de autômatos, veja Teoria dos autômatos.
+Utilizado para reconhecer uma sequencia de caracteres.
+*/
+
 /*AFD
 
 Autômato Finito Determinístico - Código simples em JAVA IDE utilizado Eclipse Versão: Luna Service Release 1 (4.4.1)
