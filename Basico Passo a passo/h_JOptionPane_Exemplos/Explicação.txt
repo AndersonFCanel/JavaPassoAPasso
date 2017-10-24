@@ -1,0 +1,13 @@
+Integer.parseInt()
+Float.parseFloat()
+Double.parseDouble()
+Booleam.parseBoolean()
+
+
+Char  letra;
+String resposta;
+JOption.Pane.showImputDialog("Digite uma letra");
+letra = resposta.charAt(0);
+
+try{
+}catch()
