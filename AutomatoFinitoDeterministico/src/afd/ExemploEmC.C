@@ -131,6 +131,7 @@ void qFim(){
     printf("Palavra Aceita pelo automata!\n");
 }
 
+//-------------------OUTRA FORMA----------------------
 
 #include <stdio.h>
 #include <string.h>
