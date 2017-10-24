@@ -78,17 +78,19 @@ public class AFD {
 			String estadoInicial = br.readLine();
 			String estadosFinais = br.readLine();
 			
-			String [] alf = DividirEConquistar(alfabeto);
-			String [] est = DividirEConquistar(estados);
-			String [] estIn = DividirEConquistar(estadoInicial);
-			String [] estFin = DividirEConquistar(estadosFinais);
+			String [] alf = DividirEConquistar(alfabeto); // Array alf recebe os caracteres separados a,b
+			String [] est = DividirEConquistar(estados); //Array est recebe os dois estados possiveis e0,e1
+			String [] estIn = DividirEConquistar(estadoInicial);//Array estIn recebe o estado  Inicial e0
+			String [] estFin = DividirEConquistar(estadosFinais);//Array estFin recebe os estados finais e0,e1
 			
-			String [] funcaoPro = DivideTransicao(funcaoPrograma);
+			String [] funcaoPro = DivideTransicao(funcaoPrograma);//Array funcaoPro recebe as funcoes de transisoa e0,a=e0:e0,b=e1:e1,b=e1
 			
-			String [] ED = new String[funcaoPro.length];//Estado de Destino
+			//Arrays para armazenarem os estados
+			String [] ED = new String[funcaoPro.length];//Estado de Destino  
 			String [] EP = new String[funcaoPro.length];//Estado de Partida
 			String [] EA = new String[funcaoPro.length];//Estado de Alfabetos
 			
+			//CONTINUAR A COMENTAR DAQUI!!!!!!
 			for(int i = 0;i<funcaoPro.length;i++){
 				String[] p1 = funcaoPro[i].split("=");
 				ED[i] = p1[1];
