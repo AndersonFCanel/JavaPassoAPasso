@@ -1,0 +1,127 @@
+/*Para que servem os comandos BREAK e CONTINUE em Java
+
+ Geralmente, em nossos programas de Java, iremos usar os laços while, for e do ... while para procurar algum ítem, número ou checar alguma condição.
+
+Por exemplo, imagine que você foi contratado para fazer um programa, em Java, claro, para um banco.
+Em um momento do aplicativo, o cliente insere o número de sua conta e o programa vai buscar esse número no banco de dados do sistema, que tem milhões de clientes cadastrados.
+Ele vai fazer essa busca através de um looping.
+
+Porém, imagine que o programa encontra os dados do cliente logo no começo, logo nas primeiras posições.
+E aí, vai checar todo o resto do banco de dados?
+Claro que não, isso seria perda de tempo.
+
+É aí que entram os comandos break e continue. Esse seria um bom exemplo onde daríamos um 'break' no laço, pois já encontramos o que queríamos.
+
+
+O comando break
+
+Break significa quebrar, parar, frear, interromper. E é isso que se faz.
+Quando o Java encontra esse comando pela frente, ele interrompe o laço/estrutura de controle ATUAL, como o while, for, do ... while e o switch (que veremos no próximo artigo da apostila).
+
+Vamos mostrar um exemplo do uso do break através de um exemplo matemático.
+
+Exemplo de uso:
+Suponha que você é um cientista e quer saber se entre os números 1 e um milhão existe um número que é múltiplo de 17 e 19, ao mesmo tempo.
+Ou seja, queremos saber se existe um número entre 1 e um milhão que deixa resto 0 na divisão por 17 e por 19.
+Caso exista, o imprima. E só imprima o menor.
+
+Poderíamos fazer um laço de 1 até 1 milhão, e testar isso através de um for.
+Ok, é uma solução. O principal na vida profissional de um programador é saber resolver o problema.
+
+Vamos usar um método chamado 'currentTimeMillis()', que retorna um tipo 'long' com o tempo atual do sistema em mili segundos. Vamos declarar esse tipo no início e ao fim do laço, e depois subtrair esses valores, assim teremos o tempo de execução do programa.
+Após imprimir o menor número, o boolean se torna falso, assim só o primeiro número é impresso. Veja:
+
+public class breakTest {
+    public static void main(String[] args) {
+        long i = System.currentTimeMillis();
+        boolean imprimir = true;
+        
+        for(int count=1 ; count <=1000000 ; count++){
+            if((count % 17 == 0) && (count % 19 == 0))
+                if(imprimir){
+                    System.out.println(count);
+                    imprimir=false;
+                }
+        }
+
+        System.out.println("Tempo de execução, em milisegundos: "+ (System.currentTimeMillis() -i));
+    }
+
+}
+
+
+Em minha máquina deu:
+26 mili segundos
+
+
+Mas se você quiser ser um bom profissional, não basta só saber resolver. Tem que resolver e da melhor maneira possível.
+Note que que o menor número achado é 323, e o laço vai até 1 milhão! Ou seja, ele percorre de 324 até 1 milhão à toa, pois já achou o número desejado!
+Ora, se ele já achou o número, 323, vamos fazer com que o laço pare, usando o comando break:
+
+public class break {
+    public static void main(String[] args) {
+        long i = System.currentTimeMillis();
+        
+        for(int count=1 ; count <=1000000 ; count++){
+            if((count % 17 == 0) && (count % 19 == 0)){
+                System.out.println(count);
+                break;
+            }
+        }
+
+        System.out.println("Tempo de execução, em milisegundos: "+ (System.currentTimeMillis() -i));
+    }
+
+}
+
+8 mili segundos
+Menos de um terço do tempo!
+
+Você pode pensar "Ah, de 26 mili segundos para 8 mili segundos a diferença é insignificante".
+Concordo com você.
+Porém, no futuro você fará aplicações maiores e que levam mais tempo, e esses pequenos detalhes farão a diferença.
+Por exemplo, existem métodos que, durante um game são facilmente chamados milhões de vezes.
+Multiplique essa diferença 'insignificante' de alguns mili segundos por milhões de vezes e terá um belo de um 'lag', ou lentidão. Isso se chama otimizar: fazer da maneira mais eficiente possível.
+
+Daremos bastante enfoque para as otimizações em nosso curso de Java, como verá no exemplo a seguir.
+
+
+O comando continue
+
+Como o nome diz, ele 'continua' o laço. O comando break interrompe o laço, já o continue interrompe somente a iteração atual.
+
+Não basta porém ser um bom profissional. Você está no curso Java Progressivo, você tem que ser um dos melhores!
+Nós vamos otimizar o código passado.
+
+Note uma coisa, queremos achar um número que seja múltiplo de 17 e 19. Ora, tal número não pode ser par, pois 17 e 19 são ímpares.
+Para cada número 'count', estamos fazendo dois testes: se é múltiplo de 17 e se é múltiplo de 19.
+
+Vamos otimizar da seguinte maneira, vamos fazer um só teste: vamos checar se é múltiplo de 2. Caso seja, nem adianta testar se é múltiplo de 17 e 19, podemos pular essa iteração.
+E como pulamos uma iteração? Com o comando continue!
+
+Veja como fica:
+
+public class continueTest {
+    public static void main(String[] args) {
+        long i = System.currentTimeMillis();
+        
+        for(int count=1 ; count <=1000000 ; count++){
+            if(count % 2 == 0){
+                continue;
+            }
+            if((count % 17 == 0) && (count % 19 == 0)){
+                System.out.println(count);
+                break;
+            }
+            
+        }
+
+        System.out.println("Tempo de execução, em milisegundos: "+ (System.currentTimeMillis() -i));
+    }
+
+}
+
+
+E temos o impressionante tempo de 1mili segundo!
+De 26 mili segundos, fomos para 1 mili segundo! Impressionante esse Java, não?
+*/

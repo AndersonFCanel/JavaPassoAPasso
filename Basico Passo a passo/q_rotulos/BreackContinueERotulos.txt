@@ -1,0 +1,186 @@
+Usando break, continue e instruções rotuladas
+
+
+As palavras-chave break e continue são usadas para encerrar um loop (while() ou for()) inteiro ou apenas uma iteração atual. Normalmente, quando usamos break ou continue, executamos um teste if() dentro do loop e se alguma condição for verdadeira (ou falsa dependendo da lógica do programa), saímos dele imediatamente. A diferença entre essas instruções é se será ou não, dado prosseguimento a execução de uma nova iteração, ou se sairemos para a primeira instrução depois do loop e continuaremos o processamento a partir deste ponto. Já as instruções rotuladas, são úteis quando você tem um loop dentro de outro e precisa em algum momento interromper a execução do loop interno e voltar, por exemplo, para a execução do loop externo.
+
+1. Instrução continue
+
+A instrução continue deve ser inserida dentro de um loop, caso contrario você terá um erro do compilador.
+A instrução continue fará com que somente a iteração atual do loop seja encerrada e que a próxima iteração do mesmo loop seja iniciada se a condição deste for atendida.
+Veja no exemplo abaixo a execução de um código simples. O método ex() possui um for() com uma regra de execução que diz que, enquanto i < 10 executa o for(). Dentro deste for, temos um teste condicional (if()) que verifica se o valor atual de i é par. Caso o valor seja par, ele entra no if(), imprime a saída e logo após imprime a próxima instrução dentro do for(). Isto será feito até que i seja igual a 10 e então sairá do for(), irá imprimir a saída Fora do for! e terminará a execução do método.
+
+private void ex() {
+	for (int i = 0; i < 10; i++) {
+
+		if (0 == (i % 2)) {
+			System.out.println(i + " = par!");
+		}
+
+		System.out.println("Valor = " + i);
+	}
+
+	System.out.println("Fora do for!");
+}
+Teremos no console a seguinte saída abaixo ao termino da execução do método ex().Observe que toda vez que um valor for par, este valor será impresso duas vezes na tela.
+
+0 
+O valor = 0
+O valor = 1
+2 é par!
+O valor = 2
+O valor = 3
+4 é par!
+O valor = 4
+O valor = 5
+6 é par!
+O valor = 6
+O valor = 7
+8 é par!
+O valor = 8
+O valor = 9
+Fora do for!
+No próximo exemplo, usaremos a instrução continue dentro do bloco if(). Veja no método exContinue() esta pequena alteração no código.
+
+private void exContinue() {
+	for (int i = 0; i < 10; i++) {
+
+		if (0 == (i % 2)) {
+			System.out.println(i + " = par. Volta ao loop com o continue!");
+			continue;
+		}
+
+		System.out.println("O valor = " + i);
+	}
+
+	System.out.println("Fora do for!");
+}
+Após a execução do método exContinue() teremos a saída abaixo exibida no console. Observe agora, que os valores pares foram impressos na tela apenas uma única vez, e não duas vezes como no método ex(). Isso ocorre porque a instrução continue quando executada, fará com que a execução do método volte para a linha inicial do for(), e assim, não permite que as linhas posteriores sejam executadas naquele momento.
+
+0 é par e volta ao loop com o continue!
+O valor = 1
+2 é par e volta ao loop com o continue!
+O valor = 3
+4 é par e volta ao loop com o continue!
+O valor = 5
+6 é par e volta ao loop com o continue!
+O valor = 7
+8 é par e volta ao loop com o continue!
+O valor = 9
+Fora do for!
+2. Instrução break
+
+As instruções break devem ser usadas dentro do loop ou de uma instrução switch (Isso não se aplica a instrução break rotulada, a qual veremos mais a frente).
+A instrução break fará com que o programa encerre a execução do loop atual e inicie o processamento na linha de código posterior ao bloco.
+O uso da instrução break é tão fácil quanto a da instrução continue. Enquanto o continue faz com que a execução do loop volte à linha inicial do for() ou do while(), o break forçará uma saída total desta execução. No exemplo a seguir, executamos o método exBreak(), substituindo a instrução continue dentro do bloco if() por uma instrução break.
+
+private void exBreak() {
+	for (int i = 0; i < 10; i++) {
+
+		if (0 == (i % 2)) {
+			System.out.println(i + " é par e forca a saida do for!");
+			break;
+		}
+
+		System.out.println("O valor = " + i);
+	}
+
+	System.out.println("Fora do for!");
+}
+Veja abaixo a saída no console após a execução do método exBreak(). Como o break força uma saída do for(), teremos apenas uma execução do bloco for(), já que zero é par.
+
+0 é par e força a saída do for!
+Fora do for!
+3. Instruções rotuladas
+
+Embora muitas instruções em Java possam ser rotuladas, é muito mais comum usar rótulos com instruções loop tais como for() ou while(), em conjunto com instruções break e continue. Uma instrução de rótulo deve ser colocada logo antes da instrução rotulada, e consiste de um identificador válido que termina com dois pontos  : . Um rótulo pode ter qualquer nome desde que este obedeça as regras de nome de variáveis validas do Java como, não ser uma palavra-chave e não iniciar por números ou caracteres especiais não validos, etc.
+
+Você precisa entender a diferença entre instruções break e continue rotuladas e não-rotuladas. As rotuladas serão necessárias somente nas situações em que você tiver um loop aninhado e precisar indicar qual quer encerrar ou a partir de qual deseja continuar a próxima iteração. Uma instrução break sairá do loop rotulado e não do loop atual, se a palavra chave break for combinada com um rótulo.
+
+A sintaxe para o uso de um nome como rótulo junto com uma instrução break ou continue consiste na palavra-chave seguida do nome do rótulo e de um ponto e vírgula. As instruções continue e break rotuladas devem ficar dentro do loop que tiver o mesmo rótulo, caso contrario, o código não será compilado.
+
+Veja a seguir o método exRotulo1(), onde será usada as instruções break e continue de forma rotulada. Criamos um rótulo chamado rotulo: no topo da instrução while(). Sempre que o código encontrar um continue ou um break, sua execução será direcionada para este ponto.
+
+private void exRotulo1() {
+	int x = 0;
+
+	rotulo:
+	while (true) {
+
+		System.out.println("* Passando pelo 1° while (rotulado)");
+
+		while (x != 5) {
+			System.out.println("* Passando pelo 2° while (nao rotulado)");
+
+			if (x < 3) {
+				System.out.println("  # continue for x < 3 -> x = " + x++);
+				continue rotulo;
+			} else if (x > 3) {
+				System.out.println("  # break for x > 3 -> x = " + x++);
+				break rotulo;
+			} else {
+				System.out.println("  # x == 3 -> x = " + x++);
+			}
+
+			System.out.println(" $ x no while -> x = " + x++);
+		}
+
+		System.out.println("* x no for -> x = " + x++);
+	}
+}
+Após executar o método exRotulo1(), teremos a saída a seguir exibida no console. Veja que enquanto o valor de x era menor que 3, nós não tivemos a execução da linha 22, isto porque, o continue força a volta ao primeiro while().
+
+Quando o valor de x for igual a 3, teremos a execução da condição else e também a linha 22 será executada já com o valor de x incrementado para 4. Esta execução continuará no segundo while(), porém o valor de x já estará valendo 5, assim, não entrará desta vez no segundo while(x != 5) e a linha 25 também será impressa.
+
+Sendo x maior que 5 a condição else if() será aceita e o break rotulo; fará com que a execução seja encerrada, já que ele manda encerrar o primeiro while(). Note que a linha 25 não será impressa na tela, porque a execução desta linha não chega a ocorrer em decorrência do termino do while() pelo break rotulo;.
+
+* Passando pelo 1° while (rotulado)
+* Passando pelo 2° while (nao rotulado)
+  # continue for x < 3 -> x = 0
+* Passando pelo 1° while (rotulado)
+* Passando pelo 2° while (não rotulado)
+  # continue for x < 3 -> x = 1
+* Passando pelo 1° while (rotulado)
+* Passando pelo 2° while (nao rotulado)
+  # continue for x < 3 -> x = 2
+* Passando pelo 1° while (rotulado)
+* Passando pelo 2° while (nao rotulado)
+  # x == 3 -> x = 3
+  $ x no while -> x = 4
+* x no for -> x = 5
+* Passando pelo 1° while (rotulado)
+* Passando pelo 2° while (nao rotulado)
+  # break for x > 3 -> x = 6
+No exemplo do método exRotulo2(), vamos usar dois laços for(), o primeiro terá um rótulo nomeado de externo: e o for() interno, terá o rótulo interno:. Dentro do for() interno, teremos uma condição if() e else. Esta condição vai testar se o valor de j é par, caso a condição seja verdadeira, será impresso na tela o valor de j e após, a execução do código volta para o inicio do for() interno, através da instrução continue interno;. Caso contrario, se j seja impar, o código irá imprimir o valor de j e testar se j + i é igual a 5. Caso a soma não seja 5, continuamos executando o for() interno, caso o valor da soma seja igual a 5, usamos a instrução break externo; para parar a execução do for() externo.
+
+private void exRotulo2() {
+	externo:
+	for (int  i = 0; i < 10; i++) {
+		System.out.println("rotulo externo -- i é " + i);
+
+		interno:
+		for (int j = 0; j < 10; j++){
+			System.out.print("rotulo interno -- ");
+
+			if (0 == (j % 2)) {
+				System.out.println("J é par " + j);
+				continue interno;
+			} else {
+				System.out.println("J é impar " + j);
+				if ( (j + i) == 5 ) {
+					System.out.println("J + I = " + (j + i) );
+					break externo;
+				}
+			}
+		}
+	}
+}
+Confira abaixo o resultado da execução do método exRotulo2(). Observe que o primeiro laço for(), foi executado uma única vez, já o segundo laço for() foi executado 6 vezes, até que j valendo 5 somado a i valendo 0, resultou na soma de 5.
+
+rotulo externo -- i é 0
+rotulo interno -- J é par 0
+rotulo interno -- J é impar 1
+rotulo interno -- J é par 2
+rotulo interno -- J é impar 3
+rotulo interno -- J é par 4
+rotulo interno -- J é impar 5
+J + I = 5
