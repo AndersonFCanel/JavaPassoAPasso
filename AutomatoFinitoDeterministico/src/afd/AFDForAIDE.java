@@ -58,6 +58,7 @@ e0,e1
 //CODIGO ADAPTADO PARA AIDE FOR ANDROID
  class AFD {
 
+	 //OBS: usar Arrays.toString()
 	public static void main(String[] args) {
 		
 		//File file = new File("C:\\Users\\Anderson\\workspace\\JavaPassoAPasso\\AutomatoFinitoDeterministico\\src\\afd/entradaAutomato.txt"); // Arquivo de entrada está anexado
@@ -77,32 +78,46 @@ e0,e1
 			String estadoInicial = "e0"; // br.readLine();//Leu e0
 			String estadosFinais = "e0,e1"; //br.readLine();// Leu e0,e1
 			
-			String [] alf = DividirEConquistar(alfabeto); // Array alf recebe os caracteres separados a,b
+			String [] alf = DividirEConquistar(alfabeto); // Array alf recebe os caracteres separados a,b 
+			//System.out.prinln("O Valor do Array alf é: "+ Arrays.toString(alf));
 			String [] est = DividirEConquistar(estados); //Array est recebe os dois estados possiveis e0,e1
+			//System.out.prinln("O Valor do Array est é: "+ Arrays.toString(est));
 			String [] estIn = DividirEConquistar(estadoInicial);//Array estIn recebe o estado  Inicial e0
+			//System.out.prinln("O Valor do Array estIn é: "+ Arrays.toString(estIn));
 			String [] estFin = DividirEConquistar(estadosFinais);//Array estFin recebe os estados finais e0,e1
+			//System.out.prinln("O Valor do Array estFin é: "+ Arrays.toString(estFin));
 			
 			String [] funcaoPro = DivideTransicao(funcaoPrograma);
 			/*Array funcaoPro recebe as funcoes de transisao e0,a=e0:e0,b=e1:e1,b=e1, as divide e coloca as em posisoes 
 			*do vetor funcaoPro, essa divisao ocorre sempre que ":" aparecer na funcao de transicao EX: |"a=e0"| -:- |"e0,b=e1"| -:- |"e1"|
 			*o exemplo anterior representa as posicoes do vetor. 
 			*/
+			
 		
-			//Caso queira saber o tamanho do Array funcaoPro DESCOMENTE a linha abaixo
+			//Caso queira saber o tamanho ou o conteúdo do Array funcaoPro DESCOMENTE as linhas abaixo
 			//System.out.println("O tamanho do Array funcaoPro é: "+funcaoPro.length);
+			//System.out.prinln("O Valor do Array funcaoPro é: "+ Arrays.toString(funcaoPro));
 		
 			//Arrays para armazenarem os estados
 			String [] ED = new String[funcaoPro.length];//Estado de Destino -  o tamnho é definido pela quantidades de transicoes, o delta
+			//System.out.prinln("O Valor do Array ED é: "+ Arrays.toString(ED));
 			String [] EP = new String[funcaoPro.length];//Estado de Partida -  o tamnho é definido pela quantidades de transicoes, o delta
+			//System.out.prinln("O Valor do Array EP é: "+ Arrays.toString(EP));
 			String [] EA = new String[funcaoPro.length];//Estado de Alfabetos -  o tamnho é definido pela quantidades de transicoes, o delta
-			
+			//System.out.prinln("O Valor do Array EA é: "+ Arrays.toString(EA));
+		
 			//LAÇOS PARA TRATAR OS ESTADOS DE DESTINO, PARTIDA E ALFABETOS QUE ESTÃO CONTIDOS NA STRING funcaoPro
 			for(int i = 0;i<funcaoPro.length;i++){
 				String[] p1 = funcaoPro[i].split("=");
+				//System.out.prinln("O Valor do Array p1 é: "+ Arrays.toString(p1));
 				ED[i] = p1[1];
+				//System.out.prinln("O Valor do Array ED["+i+"] é: "+ ED[i]);
 				String[] p2 = p1[0].split(",");
+				//System.out.prinln("O Valor do Array p2 é: "+ Arrays.toString(p2));
 				EP[i] = p2[0];
+				//System.out.prinln("O Valor do Array EP["+i+"] é: "+ EP[i]);
 				EA[i] = p2[1];
+				//System.out.prinln("O Valor do Array EA["+i+"] é: "+ EA[i]);
 			}
 			
 			//Pegando entrada
