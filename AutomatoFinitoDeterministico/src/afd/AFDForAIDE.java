@@ -40,37 +40,40 @@ e0,e1 --->>> F Conjunto de estados Finais
  * 
  * */
 
-/*Conteúdo do arquivo entradaAutomato.txt
+/*Conteúdo do arquivo entradaAutomato.txt //para android não será utilizado
 a,b
 e0,e1
 e0,a=e0:e0,b=e1:e1,b=e1
 e0
 e0,e1
 */
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+//import java.io.BufferedReader;
+//import java.io.File;
+//import java.io.FileReader;
+import java.utit.*;
 
-import javax.swing.JOptionPane;
+//import javax.swing.JOptionPane;
 
+//CODIGO ADAPTADO PARA AIDE FOR ANDROID
 public class AFD {
 
 	public static void main(String[] args) {
 		
-		File file = new File("C:\\Users\\Anderson\\workspace\\JavaPassoAPasso\\AutomatoFinitoDeterministico\\src\\afd/entradaAutomato.txt"); // Arquivo de entrada está anexado
-		try{
+		//File file = new File("C:\\Users\\Anderson\\workspace\\JavaPassoAPasso\\AutomatoFinitoDeterministico\\src\\afd/entradaAutomato.txt"); // Arquivo de entrada está anexado
+		//try{
 			
 			// Leitura e separação do arquivo
 			
-			FileReader fr = new FileReader(file);
-			BufferedReader br = new BufferedReader(fr);//Objeto fr passado como parametro para o contrutor da classe BufferedReader
+			//FileReader fr = new FileReader(file);
+			//BufferedReader br = new BufferedReader(fr);//Objeto fr passado como parametro para o contrutor da classe BufferedReader
 			//bufferedreader serve pra ler de entrada de dados, desde teclado, passando por arquivos e até sockets...
-			
-			String alfabeto = br.readLine();//.readLine serve para Ler Strings digitadas. Leu a,b
-			String estados = br.readLine();//Leu e0,e1
-			String funcaoPrograma = br.readLine();//Leu e0,a=e0:e0,b=e1:e1,b=e1
-			String estadoInicial = br.readLine();//Leu e0
-			String estadosFinais = br.readLine();// Leu e0,e1
+			Scanner s = new Scanner(System.in);
+		
+			String alfabeto = "a,b"; //br.readLine();//.readLine serve para Ler Strings digitadas. Leu a,b
+			String estados = "e0,e1"; //br.readLine();//Leu e0,e1
+			String funcaoPrograma = "e0,a=e0:e0,b=e1:e1,b=e1";// br.readLine();//Leu e0,a=e0:e0,b=e1:e1,b=e1
+			String estadoInicial = "e0"; // br.readLine();//Leu e0
+			String estadosFinais = "e0,e1"; //br.readLine();// Leu e0,e1
 			
 			String [] alf = DividirEConquistar(alfabeto); // Array alf recebe os caracteres separados a,b
 			String [] est = DividirEConquistar(estados); //Array est recebe os dois estados possiveis e0,e1
@@ -97,7 +100,9 @@ public class AFD {
 			while(true){
 				String EI = estadoInicial;//String EI recebe e0
 				String palavra = null;//String para armazenar o dado da janela JOptionPane
-				palavra = JOptionPane.showInputDialog("Informações--- \n\n Alfabeto: {"+alfabeto+"}\nEstados: {"+estados+"} \n\nEntre com uma palavra: ");
+				//palavra = JOptionPane.showInputDialog("Informações--- \n\n Alfabeto: {"+alfabeto+"}\nEstados: {"+estados+"} \n\nEntre com uma palavra: ");
+				System.out.println("O alfabeto é: "+alfabeto+"\n O estados: "+estados+"\nEntre com a palavra a se verificada: ");
+				palavra = s.next();
 				
 				if(VerificaPalavra(palavra,alf)){
 					boolean flag = false; //flag serve para controlar  que determinarao em que condição a abertura das janelas aceito e naõ aceito deve ocorrer.
@@ -118,21 +123,23 @@ public class AFD {
 					}
 					
 					if(flag){/*Caso tenha sido atendida a condição do if anterior será impresso*/
-						JOptionPane.showMessageDialog(null,"Palavra não pertence ao alfabeto!");
+						//JOptionPane.showMessageDialog(null,"Palavra não pertence ao alfabeto!");
+						System.out.println("Palavra não pertence ao alfabeto!");
 					}else{/*Caso não tenha sido atendida sera feita uma nova verificacao. */
 						PalavraAceita(EI,estFin); // Verifica se o estado final pertence a um dos estados finais
 					}
 					
 					
 				}else{
-					JOptionPane.showMessageDialog(null,"Palavra não pertence ao alfabeto!");
+					//JOptionPane.showMessageDialog(null,"Palavra não pertence ao alfabeto!");
+					System.out.println("Palavra não pertence ao alfabeto!");
 				}
 				
 			}
 			
-		}catch(Exception e){//Caso aja uma exception
-			System.out.println("Erro:"+e); //Imprimir erro no console.
-		}
+		//}catch(Exception e){//Caso aja uma exception
+			//System.out.println("Erro:"+e); //Imprimir erro no console.
+		//}
 
 	}
 //--------------------METODOS---------------------------
@@ -167,9 +174,11 @@ public class AFD {
 		}
 		
 		if(x == 1){
-			JOptionPane.showMessageDialog(null, "Palavra Aceita");
+			//JOptionPane.showMessageDialog(null, "Palavra Aceita");
+			System.out.println("Palavra Aceita");
 		}else{
-			JOptionPane.showMessageDialog(null, "Palavra não foi aceita");
+			//JOptionPane.showMessageDialog(null, "Palavra não foi aceita");
+			System.out.println("Palavra não foi Aceita");
 		}
 		
 	}
