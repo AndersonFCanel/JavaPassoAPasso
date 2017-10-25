@@ -56,9 +56,10 @@ e0,e1
 //import javax.swing.JOptionPane;
 
 //CODIGO ADAPTADO PARA AIDE FOR ANDROID
+//OBS: PARA ACOMPANHAR O PROCESSAMENTO DO CODIGO VIA CONSOLE DESCOMENTE AS LINHAS DE SYSTEM.OUT
  class AFD {
 
-	 //OBS: usar Arrays.toString()
+	
 	public static void main(String[] args) {
 		
 		//File file = new File("C:\\Users\\Anderson\\workspace\\JavaPassoAPasso\\AutomatoFinitoDeterministico\\src\\afd/entradaAutomato.txt"); // Arquivo de entrada está anexado
@@ -123,30 +124,38 @@ e0,e1
 			//Pegando entrada
 			while(true){
 				String EI = estadoInicial;//String EI recebe e0
+				//System.out.prinln("O Valor da Sting EI é: "+ EI);
 				String palavra = null;//String para armazenar o dado da janela JOptionPane
 				//palavra = JOptionPane.showInputDialog("Informações--- \n\n Alfabeto: {"+alfabeto+"}\nEstados: {"+estados+"} \n\nEntre com uma palavra: ");
 				System.out.println("O alfabeto é: "+alfabeto+"\nOs estados: "+estados+"\nEntre com a palavra a se verificada: ");
 				palavra = s.next();
 				
+				
 				if(VerificaPalavra(palavra,alf)){
-					boolean flag = false; //flag serve para controlar o if que determinara  em que condição a abertura das janelas aceito e naõ aceito deve ocorrer.
+					boolean flag = false; //flag serve para controlar o if que determinara  em que condição a abertura das janelas "aceito" e "naõ pertence devem ocorrer.
 					
 					for(int x = 0 ; x <palavra.length() ; x++){ //para x =0 até x < que tamanho da palavra inserida na janela
 						String l = ""+palavra.charAt(x); //String l recebe palavra vazia ""+ o caracter referente ao valor de   x no laco for.
+						//System.out.prinln("O Valor da Sting l é: "+ l);
+						
 						int monitora = 0; // monitora serve para acompanhar quantas ocorrencias o proximo laco tera.
 						for(int y = 0 ; y <ED.length ; y++){
-							if(l .equals(EA[y]) && EI .equals(EP[y])){ /**/
+							if(l .equals(EA[y]) && EI .equals(EP[y])){ 
+								/*Se o valor de l for igual ao de EA[y] e EI[y]*/
+								//System.out.prinln("O valor de EI é: "+EI);
 								EI = ED[y];
+								//System.out.prinln("O valor de ED["+y+"] é: "+ED[y]);
 								monitora++; 
+								//System.out.prinln("Monitora foi incrementado, seu valor é: "+i);
 							}
 						}
 						if(monitora == 0){//Se nenhuma das vezes os if acima for verdadeiro então
 							flag = true;
-							break; // Interrompe o laco aqui.
+							break; // Interrompe o laco aqui mais interno qui.
 						}
 					}
 					
-					if(flag){/*Caso tenha sido atendida a condição do if anterior será impresso*/
+					if(flag){/*Caso tenha sido atendida a condição do if anterior será impresso. variavel flag tera valor verdadeiro*/
 						//JOptionPane.showMessageDialog(null,"Palavra não pertence ao alfabeto!\n\n");
 						System.out.println("Palavra não pertence ao alfabeto!");
 					}else{/*Caso não tenha sido atendida sera feita uma nova verificacao. */
