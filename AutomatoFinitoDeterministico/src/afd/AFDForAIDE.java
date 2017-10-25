@@ -103,7 +103,7 @@ e0,e1
 				String EI = estadoInicial;//String EI recebe e0
 				String palavra = null;//String para armazenar o dado da janela JOptionPane
 				//palavra = JOptionPane.showInputDialog("Informações--- \n\n Alfabeto: {"+alfabeto+"}\nEstados: {"+estados+"} \n\nEntre com uma palavra: ");
-				System.out.println("O alfabeto é: "+alfabeto+"\n O estados: "+estados+"\nEntre com a palavra a se verificada: ");
+				System.out.println("O alfabeto é: "+alfabeto+"\nOs estados: "+estados+"\nEntre com a palavra a se verificada: ");
 				palavra = s.next();
 				
 				if(VerificaPalavra(palavra,alf)){
@@ -125,7 +125,7 @@ e0,e1
 					}
 					
 					if(flag){/*Caso tenha sido atendida a condição do if anterior será impresso*/
-						//JOptionPane.showMessageDialog(null,"Palavra não pertence ao alfabeto!");
+						//JOptionPane.showMessageDialog(null,"Palavra não pertence ao alfabeto!\n\n");
 						System.out.println("Palavra não pertence ao alfabeto!");
 					}else{/*Caso não tenha sido atendida sera feita uma nova verificacao. */
 						PalavraAceita(EI,estFin); // Verifica se o estado final pertence a um dos estados finais
@@ -133,7 +133,7 @@ e0,e1
 					
 					
 				}else{
-					//JOptionPane.showMessageDialog(null,"Palavra não pertence ao alfabeto!");
+					//JOptionPane.showMessageDialog(null,"Palavra não pertence ao alfabeto!\n\n");
 					System.out.println("Palavra não pertence ao alfabeto!");
 				}
 				
@@ -176,10 +176,10 @@ e0,e1
 		}
 		
 		if(x == 1){
-			//JOptionPane.showMessageDialog(null, "Palavra Aceita");
+			//JOptionPane.showMessageDialog(null, "Palavra Aceita\n\n");
 			System.out.println("Palavra Aceita");
 		}else{
-			//JOptionPane.showMessageDialog(null, "Palavra não foi aceita");
+			//JOptionPane.showMessageDialog(null, "Palavra não foi aceita\n\n");
 			System.out.println("Palavra não foi Aceita");
 		}
 		
