@@ -82,12 +82,19 @@ e0,e1
 			String [] estIn = DividirEConquistar(estadoInicial);//Array estIn recebe o estado  Inicial e0
 			String [] estFin = DividirEConquistar(estadosFinais);//Array estFin recebe os estados finais e0,e1
 			
-			String [] funcaoPro = DivideTransicao(funcaoPrograma);//Array funcaoPro recebe as funcoes de transisoa e0,a=e0:e0,b=e1:e1,b=e1
-			
+			String [] funcaoPro = DivideTransicao(funcaoPrograma);
+			/*Array funcaoPro recebe as funcoes de transisao e0,a=e0:e0,b=e1:e1,b=e1, as divide e coloca as em posisoes 
+			*do vetor funcaoPro, essa divisao ocorre sempre que ":" aparecer na funcao de transicao EX: |"a=e0"| -:- |"e0,b=e1"| -:- |"e1"|
+			*o exemplo anterior representa as posicoes do vetor. 
+			*/
+		
+			//Caso queira saber o tamanho do Array funcaoPro DESCOMENTE a linha abaixo
+			//System.out.println("O tamanho do Array funcaoPro é: "+funcaoPro.length);
+		
 			//Arrays para armazenarem os estados
-			String [] ED = new String[funcaoPro.length];//Estado de Destino  
-			String [] EP = new String[funcaoPro.length];//Estado de Partida
-			String [] EA = new String[funcaoPro.length];//Estado de Alfabetos
+			String [] ED = new String[funcaoPro.length];//Estado de Destino -  o tamnho é definido pela quantidades de transicoes, o delta
+			String [] EP = new String[funcaoPro.length];//Estado de Partida -  o tamnho é definido pela quantidades de transicoes, o delta
+			String [] EA = new String[funcaoPro.length];//Estado de Alfabetos -  o tamnho é definido pela quantidades de transicoes, o delta
 			
 			//LAÇOS PARA TRATAR OS ESTADOS DE DESTINO, PARTIDA E ALFABETOS QUE ESTÃO CONTIDOS NA STRING funcaoPro
 			for(int i = 0;i<funcaoPro.length;i++){
@@ -107,11 +114,11 @@ e0,e1
 				palavra = s.next();
 				
 				if(VerificaPalavra(palavra,alf)){
-					boolean flag = false; //flag serve para controlar  que determinarao em que condição a abertura das janelas aceito e naõ aceito deve ocorrer.
+					boolean flag = false; //flag serve para controlar o if que determinara  em que condição a abertura das janelas aceito e naõ aceito deve ocorrer.
 					
 					for(int x = 0 ; x <palavra.length() ; x++){ //para x =0 até x < que tamanho da palavra inserida na janela
 						String l = ""+palavra.charAt(x); //String l recebe palavra vazia ""+ o caracter referente ao valor de   x no laco for.
-						int monitora = 0; // monitora serve para:   CONTINUAR A COMENTAR DAQUI,,, PAREI AQUI!!!
+						int monitora = 0; // monitora serve para acompanhar quantas ocorrencias o proximo laco tera.
 						for(int y = 0 ; y <ED.length ; y++){
 							if(l .equals(EA[y]) && EI .equals(EP[y])){ /**/
 								EI = ED[y];
