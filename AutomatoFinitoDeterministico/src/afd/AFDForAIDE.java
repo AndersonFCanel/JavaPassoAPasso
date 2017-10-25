@@ -1,4 +1,4 @@
-import java.utit.*;
+//import java.utit.*;
 //package afd;
 //https://pt.wikipedia.org/wiki/Aut%C3%B4mato_finito_determin%C3%ADstico
 
