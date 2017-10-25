@@ -71,6 +71,7 @@ public class AFD {
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);//Objeto fr passado como parametro para o contrutor da classe BufferedReader
 			//bufferedreader serve pra ler de entrada de dados, desde teclado, passando por arquivos e até sockets...
+			Scanner s = new Scanner(System.in);
 			
 			String alfabeto = br.readLine();//.readLine serve para Ler Strings digitadas. Leu a,b
 			String estados = br.readLine();//Leu e0,e1
@@ -78,32 +79,47 @@ public class AFD {
 			String estadoInicial = br.readLine();//Leu e0
 			String estadosFinais = br.readLine();// Leu e0,e1
 			
-			String [] alf = DividirEConquistar(alfabeto); // Array alf recebe os caracteres separados a,b
+			
+			String [] alf = DividirEConquistar(alfabeto); // Array alf recebe os caracteres separados a,b 
+			//System.out.prinln("O Valor do Array alf é: "+ Arrays.toString(alf));
 			String [] est = DividirEConquistar(estados); //Array est recebe os dois estados possiveis e0,e1
+			//System.out.prinln("O Valor do Array est é: "+ Arrays.toString(est));
 			String [] estIn = DividirEConquistar(estadoInicial);//Array estIn recebe o estado  Inicial e0
+			//System.out.prinln("O Valor do Array estIn é: "+ Arrays.toString(estIn));
 			String [] estFin = DividirEConquistar(estadosFinais);//Array estFin recebe os estados finais e0,e1
+			//System.out.prinln("O Valor do Array estFin é: "+ Arrays.toString(estFin));
 			
 			String [] funcaoPro = DivideTransicao(funcaoPrograma);
 			/*Array funcaoPro recebe as funcoes de transisao e0,a=e0:e0,b=e1:e1,b=e1, as divide e coloca as em posisoes 
 			*do vetor funcaoPro, essa divisao ocorre sempre que ":" aparecer na funcao de transicao EX: |"a=e0"| -:- |"e0,b=e1"| -:- |"e1"|
 			*o exemplo anterior representa as posicoes do vetor. 
 			*/
+			
 		
-			//Caso queira saber o tamanho do Array funcaoPro DESCOMENTE a linha abaixo
+			//Caso queira saber o tamanho ou o conteúdo do Array funcaoPro DESCOMENTE as linhas abaixo
 			//System.out.println("O tamanho do Array funcaoPro é: "+funcaoPro.length);
+			//System.out.prinln("O Valor do Array funcaoPro é: "+ Arrays.toString(funcaoPro));
 		
 			//Arrays para armazenarem os estados
 			String [] ED = new String[funcaoPro.length];//Estado de Destino -  o tamnho é definido pela quantidades de transicoes, o delta
+			//System.out.prinln("O Valor do Array ED é: "+ Arrays.toString(ED));
 			String [] EP = new String[funcaoPro.length];//Estado de Partida -  o tamnho é definido pela quantidades de transicoes, o delta
+			//System.out.prinln("O Valor do Array EP é: "+ Arrays.toString(EP));
 			String [] EA = new String[funcaoPro.length];//Estado de Alfabetos -  o tamnho é definido pela quantidades de transicoes, o delta
-				
+			//System.out.prinln("O Valor do Array EA é: "+ Arrays.toString(EA));
+		
 			//LAÇOS PARA TRATAR OS ESTADOS DE DESTINO, PARTIDA E ALFABETOS QUE ESTÃO CONTIDOS NA STRING funcaoPro
 			for(int i = 0;i<funcaoPro.length;i++){
 				String[] p1 = funcaoPro[i].split("=");
+				//System.out.prinln("O Valor do Array p1 é: "+ Arrays.toString(p1));
 				ED[i] = p1[1];
+				//System.out.prinln("O Valor do Array ED["+i+"] é: "+ ED[i]);
 				String[] p2 = p1[0].split(",");
+				//System.out.prinln("O Valor do Array p2 é: "+ Arrays.toString(p2));
 				EP[i] = p2[0];
+				//System.out.prinln("O Valor do Array EP["+i+"] é: "+ EP[i]);
 				EA[i] = p2[1];
+				//System.out.prinln("O Valor do Array EA["+i+"] é: "+ EA[i]);
 			}
 			
 			//Pegando entrada
@@ -111,17 +127,26 @@ public class AFD {
 				String EI = estadoInicial;//String EI recebe e0
 				String palavra = null;//String para armazenar o dado da janela JOptionPane
 				palavra = JOptionPane.showInputDialog("Informações--- \n\n Alfabeto: {"+alfabeto+"}\nEstados: {"+estados+"} \n\nEntre com uma palavra: ");
+				String EI = estadoInicial;//String EI recebe e0
+				//System.out.prinln("O Valor da Sting EI é: "+ EI);
+				String palavra = null;//String para armazenar o dado da janela JOptionPane
+				palavra = JOptionPane.showInputDialog("Informações--- \n\n Alfabeto: {"+alfabeto+"}\nEstados: {"+estados+"} \n\nEntre com uma palavra: ");
+				//System.out.println("O alfabeto é: "+alfabeto+"\nOs estados: "+estados+"\nEntre com a palavra a se verificada: ");
+				//palavra = s.next();
 				
 				if(VerificaPalavra(palavra,alf)){
 					boolean flag = false; //flag serve para controlar  que determinarao em que condição a abertura das janelas aceito e naõ aceito deve ocorrer.
 					
 					for(int x = 0 ; x <palavra.length() ; x++){ //para x =0 até x < que tamanho da palavra inserida na janela
 						String l = ""+palavra.charAt(x); //String l recebe palavra vazia ""+ o caracter referente ao valor de   x no laco for.
-						int monitora = 0; // monitora serve para:   CONTINUAR A COMENTAR DAQUI,,, PAREI AQUI!!!
+						//System.out.prinln("O Valor da Sting l é: "+ l);
+						
+						int monitora = 0; // monitora serve para acompanhar quantas ocorrencias o proximo laco tera.
 						for(int y = 0 ; y <ED.length ; y++){
 							if(l .equals(EA[y]) && EI .equals(EP[y])){ /**/
 								EI = ED[y];
 								monitora++; 
+								//System.out.prinln("Monitora foi incrementado, seu valor é: "+i);
 							}
 						}
 						if(monitora == 0){//Se nenhuma das vezes os if acima for verdadeiro então
