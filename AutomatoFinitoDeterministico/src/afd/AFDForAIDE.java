@@ -1,4 +1,5 @@
-package afd;
+import java.utit.*;
+//package afd;
 //https://pt.wikipedia.org/wiki/Aut%C3%B4mato_finito_determin%C3%ADstico
 
 /*Definição Formal[editar | editar código-fonte]
@@ -50,12 +51,12 @@ e0,e1
 //import java.io.BufferedReader;
 //import java.io.File;
 //import java.io.FileReader;
-import java.utit.*;
+
 
 //import javax.swing.JOptionPane;
 
 //CODIGO ADAPTADO PARA AIDE FOR ANDROID
-public class AFD {
+ class AFD {
 
 	public static void main(String[] args) {
 		
@@ -67,6 +68,7 @@ public class AFD {
 			//FileReader fr = new FileReader(file);
 			//BufferedReader br = new BufferedReader(fr);//Objeto fr passado como parametro para o contrutor da classe BufferedReader
 			//bufferedreader serve pra ler de entrada de dados, desde teclado, passando por arquivos e até sockets...
+			
 			Scanner s = new Scanner(System.in);
 		
 			String alfabeto = "a,b"; //br.readLine();//.readLine serve para Ler Strings digitadas. Leu a,b
@@ -183,14 +185,16 @@ public class AFD {
 		
 	}
 
-	private static String[] DivideTransicao(String valor) {
-		return valor.split(":");//Divide a String quando ocorrer ":"
-	/*
+	 
+	 /*
 	Split – O Split é usado para dividir uma string em pequenos pedaços.
 	Para isso, seu método retorna um array de strings, contendo as respectivas partes,
 	definidas de acordo com a string passada como parâmetro, que na verdade funciona como 
 	o “agente” divisor da mesma.
 	*/
+	private static String[] DivideTransicao(String valor) {
+		return valor.split(":");//Divide a String quando ocorrer ":"
+	
 	}
 
 	private static String[] DividirEConquistar(String valor) {
