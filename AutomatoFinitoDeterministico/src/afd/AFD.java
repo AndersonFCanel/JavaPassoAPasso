@@ -143,19 +143,22 @@ public class AFD {
 						
 						int monitora = 0; // monitora serve para acompanhar quantas ocorrencias o proximo laco tera.
 						for(int y = 0 ; y <ED.length ; y++){
-							if(l .equals(EA[y]) && EI .equals(EP[y])){ /**/
+							if(l .equals(EA[y]) && EI .equals(EP[y])){ 
+								/*Se o valor de l for igual ao de EA[y] e EI[y]*/
+								//System.out.prinln("O valor de EI é: "+EI);
 								EI = ED[y];
+								//System.out.prinln("O valor de ED["+y+"] é: "+ED[y]);
 								monitora++; 
 								//System.out.prinln("Monitora foi incrementado, seu valor é: "+i);
 							}
 						}
 						if(monitora == 0){//Se nenhuma das vezes os if acima for verdadeiro então
 							flag = true;
-							break; // Interrompe o laco aqui.
+							break; // Interrompe o laco aqui mais interno qui.
 						}
 					}
 					
-					if(flag){/*Caso tenha sido atendida a condição do if anterior será impresso*/
+					if(flag){/*Caso tenha sido atendida a condição do if anterior será impresso. variavel flag tera valor verdadeiro*/
 						JOptionPane.showMessageDialog(null,"Palavra não pertence ao alfabeto!");
 					}else{/*Caso não tenha sido atendida sera feita uma nova verificacao. */
 						PalavraAceita(EI,estFin); // Verifica se o estado final pertence a um dos estados finais
