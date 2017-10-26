@@ -1,4 +1,10 @@
+#https://wiki.python.org.br/AprendaProgramar#Aprenda_a_programar
 #https://repl.it/languages/python
+#Só use len() quando você precisar saber:
+#Quantos caracteres tem numa string;
+#Quantos itens estão presentes numa lista, tupla, ou set;
+#Quantas chaves existem num dicionário;
+#Quantos itens existem em qualquer objeto iterável.
 
 print '**********Automatos**********'
 alfabeto = raw_input('Digite um alfabeto: ')
