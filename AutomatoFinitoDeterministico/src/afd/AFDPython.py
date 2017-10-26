@@ -66,6 +66,7 @@ for p in range(cad)	:     #
 		if estadoa == estadosf[i]:
 			teste = 1
 	if teste == 1:
-		print '\nPalavra considerada valida\n\n'
+		print '\nPalavra %s'%palavra +' é considerada valida\n\n'
 	else:
-		print '\nPalavra nao considerada valida\n\n'
+		print '\nPalavra %s'%palavra +' nao considerada valida\n\n'
+		
