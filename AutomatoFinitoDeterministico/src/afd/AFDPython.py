@@ -20,6 +20,7 @@ vai={}
 le={}
 estadosf={}
 i=0
+
 '''
 p é incrementado dntro da faixa de 0 ao tamanho 
 de alflen
@@ -54,19 +55,23 @@ for p in range(cad)	:     #
 				aux=vai[i]
 				mudou=1
 				break
+		teste1 =0	
 		if mudou == 1:
 			print 'de q%i ' %estadoa + 'leu %c ' %palavra[p] + 'foi para q%i ' %aux
 			estadoa=aux
 		else:
 			print 'nao tem regra para esse simbolo'
 			print 'o programa sera encerrado!!!'
+			teste1 =1
 			break
+			
 	teste = 0
 	for i in range(0, qestadosf):
 		if estadoa == estadosf[i]:
 			teste = 1
-	if teste == 1:
+	if teste == 1 and teste1 !=1:
 		print '\nPalavra %s'%palavra +' é considerada valida\n\n'
 	else:
 		print '\nPalavra %s'%palavra +' nao considerada valida\n\n'
+		
 		
