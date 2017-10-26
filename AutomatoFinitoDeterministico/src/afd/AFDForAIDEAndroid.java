@@ -1,5 +1,5 @@
-//import java.utit.*;
 //package afd;
+import java.util.*;
 //https://pt.wikipedia.org/wiki/Aut%C3%B4mato_finito_determin%C3%ADstico
 
 /*Definição Formal[editar | editar código-fonte]
@@ -57,7 +57,7 @@ e0,e1
 
 //CODIGO ADAPTADO PARA AIDE FOR ANDROID
 //OBS: PARA ACOMPANHAR O PROCESSAMENTO DO CODIGO VIA CONSOLE DESCOMENTE AS LINHAS DE SYSTEM.OUT
- class AFD {
+ class Main {
 
 	
 	public static void main(String[] args) {
@@ -71,8 +71,9 @@ e0,e1
 			//BufferedReader br = new BufferedReader(fr);//Objeto fr passado como parametro para o contrutor da classe BufferedReader
 			//bufferedreader serve pra ler de entrada de dados, desde teclado, passando por arquivos e até sockets...
 			
-			Scanner s = new Scanner(System.in);
 		
+			Scanner s1 = new Scanner(System.in);
+			
 			String alfabeto = "a,b"; //br.readLine();//.readLine serve para Ler Strings digitadas. Leu a,b
 			String estados = "e0,e1"; //br.readLine();//Leu e0,e1
 			String funcaoPrograma = "e0,a=e0:e0,b=e1:e1,b=e1";// br.readLine();//Leu e0,a=e0:e0,b=e1:e1,b=e1
@@ -131,12 +132,12 @@ e0,e1
 			//Pegando entrada
 			while(true){
 				String EI = estadoInicial;//String EI recebe e0
-				System.out.println("O Valor da Sting EI é: "+ EI);
+				System.out.println("O Valor da String EI é: "+ EI);
 				
 				String palavra = null;//String para armazenar o dado da janela JOptionPane
 				//palavra = JOptionPane.showInputDialog("Informações--- \n\n Alfabeto: {"+alfabeto+"}\nEstados: {"+estados+"} \n\nEntre com uma palavra: ");
 				System.out.println("O alfabeto é: "+alfabeto+"\nOs estados: "+estados+"\nEntre com a palavra a se verificada: ");
-				palavra = s.next();
+				palavra = s1.next();
 				
 				
 				if(VerificaPalavra(palavra,alf)){
@@ -144,7 +145,7 @@ e0,e1
 					
 					for(int x = 0 ; x <palavra.length() ; x++){ //para x =0 até x < que tamanho da palavra inserida na janela
 						String l = ""+palavra.charAt(x); //String l recebe palavra vazia ""+ o caracter referente ao valor de   x no laco for.
-						//System.out.println("O Valor da Sting l é: "+ l);
+						System.out.println("O Valor da String l é: "+ l);
 						
 						int monitora = 0; // monitora serve para acompanhar quantas ocorrencias o proximo laco tera.
 						for(int y = 0 ; y <ED.length ; y++){
@@ -165,7 +166,7 @@ e0,e1
 					
 					if(flag){/*Caso tenha sido atendida a condição do if anterior será impresso. variavel flag tera valor verdadeiro*/
 						//JOptionPane.showMessageDialog(null,"Palavra não pertence ao alfabeto!\n\n");
-						System.out.println("Palavra não pertence ao alfabeto!");
+						System.out.println("\nPalavra não pertence ao alfabeto!\n\n");
 					}else{/*Caso não tenha sido atendida sera feita uma nova verificacao. */
 						PalavraAceita(EI,estFin); // Verifica se o estado final pertence a um dos estados finais
 					}
@@ -173,7 +174,7 @@ e0,e1
 					
 				}else{
 					//JOptionPane.showMessageDialog(null,"Palavra não pertence ao alfabeto!\n\n");
-					System.out.println("Palavra não pertence ao alfabeto!");
+					System.out.println("\nPalavra não pertence ao alfabeto!\n\n");
 				}
 				
 			}
@@ -216,10 +217,10 @@ e0,e1
 		
 		if(x == 1){
 			//JOptionPane.showMessageDialog(null, "Palavra Aceita\n\n");
-			System.out.println("Palavra Aceita");
+			System.out.println("\nPalavra Aceita\n\n");
 		}else{
 			//JOptionPane.showMessageDialog(null, "Palavra não foi aceita\n\n");
-			System.out.println("Palavra não foi Aceita");
+			System.out.println("\nPalavra não foi Aceita\n\n");
 		}
 		
 	}
