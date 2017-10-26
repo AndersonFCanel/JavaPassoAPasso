@@ -70,7 +70,7 @@ e0,e1
 			//FileReader fr = new FileReader(file);
 			//BufferedReader br = new BufferedReader(fr);//Objeto fr passado como parametro para o contrutor da classe BufferedReader
 			//bufferedreader serve pra ler de entrada de dados, desde teclado, passando por arquivos e até sockets...
-			
+				System.out.println("ESTE CODIGO AO SER EXECUTADO DEVE SER ACOMPANHADO PASSO A PASSO JUNTO AO CODIGO!");
 		
 			Scanner s1 = new Scanner(System.in);
 			
@@ -136,8 +136,10 @@ e0,e1
 				
 				String palavra = null;//String para armazenar o dado da janela JOptionPane
 				//palavra = JOptionPane.showInputDialog("Informações--- \n\n Alfabeto: {"+alfabeto+"}\nEstados: {"+estados+"} \n\nEntre com uma palavra: ");
+				System.out.println("\n\n**********************************************");
 				System.out.println("O alfabeto é: "+alfabeto+"\nOs estados: "+estados+"\nEntre com a palavra a se verificada: ");
 				palavra = s1.next();
+				System.out.println("**********************************************");
 				
 				
 				if(VerificaPalavra(palavra,alf)){
@@ -151,15 +153,19 @@ e0,e1
 						for(int y = 0 ; y <ED.length ; y++){
 							if(l .equals(EA[y]) && EI .equals(EP[y])){ 
 								/*Se o valor de l for igual ao de EA[y] e EI[y]*/
-								//System.out.println("O valor de EI é: "+EI);
+								System.out.println("O valor de EI é: "+EI);
+								
 								EI = ED[y];
-								//System.out.println("O valor de ED["+y+"] é: "+ED[y]);
+								System.out.println("O valor de ED["+y+"] é: "+ED[y]);
+								
 								monitora++; 
-								//System.out.println("Monitora foi incrementado, seu valor é: "+i);
+								System.out.println("Monitora foi incrementado, seu novo valor é: "+monitora);
 							}
 						}
-						if(monitora == 0){//Se nenhuma das vezes os if acima for verdadeiro então
+						if(monitora == 0){//Se nenhuma das vezes os if acima forem verdadeiros então
 							flag = true;
+							System.out.println("Monitora NÃO foi incrementado, seu  valor é: "+monitora);
+							System.out.println("O valor de flag é : "+flag);
 							break; // Interrompe o laco aqui mais interno qui.
 						}
 					}
