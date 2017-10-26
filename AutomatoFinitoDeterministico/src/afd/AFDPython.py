@@ -6,6 +6,7 @@ print '****AUTOMATO FINITO DETERMINISTICO****'
 print '--------------------------------------\n\n'
 
 alfabeto = raw_input('Digite um alfabeto: ')
+
 '''
 Pegando o modulo desse alfabelo
 '''
@@ -22,7 +23,7 @@ estadosf={}
 i=0
 
 '''
-p é incrementado dntro da faixa de 0 ao tamanho 
+p é incrementado dentro da faixa de 0 ao tamanho 
 de alflen
 
 '''
@@ -30,9 +31,9 @@ for p in range(0, alflen):
 	for j in range(0, estados):
 		#print 'q%i' %j + ' le %c vai para: ' %alfabeto[p]
 		regra=raw_input ('q%i' %j + ' le %c vai para: q' %alfabeto[p])
-		parte[i] = j
-		vai[i] = int(regra)
-		le[i] = alfabeto[p]
+		parte[i] = j #Parte na posição i recebe a qtd de vezes que o for mais interno 'rodou'
+		vai[i] = int(regra)#vai[i] recebe a (delta)função de transição do estado qx vai para q?
+		le[i] = alfabeto[p]#le[i] recebe a posição i da String alfabeto
 		i=i+1
 estadoi = int (raw_input ('Qual e o estado inicial: q'))
 qestadosf = int (raw_input ('Quantos estados finais: '))
@@ -75,3 +76,47 @@ for p in range(cad)	:     #
 		print '\nPalavra %s'%palavra +' nao considerada valida\n\n'
 		
 		
+		
+		
+'''
+CASO QUEIRA USAR O INPUT AUTOMATICO QUE FICA ACIMA DO CONSOLE COPIE E COLE AS ENTRADAS:
+Teste com alfabeto AMOR, 4 estados e palavra AMORA
+
+
+AMOR
+4
+1
+1
+2
+3
+0
+2
+2
+3
+0
+0
+3
+3
+0
+1
+2
+3
+0
+1
+3
+5
+AMORA
+
+Teste com palavra ab, 2 estados e palavra a escolher
+
+AB
+2
+1
+0
+1
+0
+0
+1
+1
+
+'''
