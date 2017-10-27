@@ -135,7 +135,7 @@ e0,e1
 			//Pegando entrada
 			while(true){
 				String EI = estadoInicial;//String EI recebe e0
-				System.out.println("O Valor da String EI é: "+ EI);
+				System.out.println("O Valor da String EI(Estado inicial) é: "+ EI);
 				
 				String palavra = null;//String para armazenar o dado da janela JOptionPane
 				//palavra = JOptionPane.showInputDialog("Informações--- \n\n Alfabeto: {"+alfabeto+"}\nEstados: {"+estados+"} \n\nEntre com uma palavra: ");
@@ -144,7 +144,7 @@ e0,e1
 				palavra = s1.next();
 				System.out.println("**********************************************");
 				
-				
+				//Metodo responsavel pela chegagem, recebe a String inserida pelo usuário(A palavra) e o alfabeto como parametros
 				if(VerificaPalavra(palavra,alf)){
 					boolean flag = false; //flag serve para controlar o if que determinara  em que condição a abertura das janelas "aceito" e "naõ pertence devem ocorrer.
 					
@@ -195,19 +195,23 @@ e0,e1
 	}
 //--------------------METODOS---------------------------
 	
-	private static boolean VerificaPalavra(String palavra, String [] alf) {
-		
+	//Metodo responsavel pela chegagem
+	private static boolean VerificaPalavra(String palavra, String [] alf) { //RETORNO TRUE OU FALSE
+		System.out.println("\n****Metodo verificador de palavras\n");
 		int cont = 0;
-		for(int x = 0 ; x < palavra.length(); x++){
-			String l = ""+palavra.charAt(x);
+		for(int x = 0 ; x < palavra.length(); x++){ //for é incrementado até o tamanho da palavra inserida pelo usuario
+			String l = ""+palavra.charAt(x); //String l recebe cada caracter digitados e entre eles palavra vazia
+			System.out.println("\nO valor da String l(Armazenador de caracteres da palavra inserida) é: "+l);
 			for(int y = 0 ; y < alf.length ; y++){
-				if(l .equals(alf[y])){
-					cont++;
+				if(l .equals(alf[y])){//cada letra inserida na string digitada será lida e comparada com uma letra do alfabeto inserido
+					System.out.println("\nO caracter foi encontrado no alfabeto: ");
+					cont++; // cada vez que houver uma ocorrencia de igualdade cont será incrementado
+					System.out.println("\nContador de palavras que pertencem ao alfabeto: "+cont);
 				}
 			}
 		}
-		
-		if(cont == palavra.length()){
+		System.out.println("\n****FIM DO Metodo verificador de palavras\n\n");
+		if(cont == palavra.length()){ // caso o contador seja = ao tamanho da palavra isso significa que ela esta contida nesse alfabeto
 			return true;
 		}else{
 			return false;
@@ -215,7 +219,8 @@ e0,e1
 		
 	}
 
-	private static void PalavraAceita(String EP, String[] estFin) {
+	//
+	private static void PalavraAceita(String EP, String[] estFin) {//Recebe EI como estado atual e estFim como os estados finais definidos élo usuário
 		
 		int x = 0;
 		for(int i = 0 ; i < estFin.length ; i++){
