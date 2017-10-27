@@ -142,7 +142,7 @@ e0,e1
 				System.out.println("\n\n**********************************************");
 				System.out.println("O alfabeto é: "+alfabeto+"\nOs estados: "+estados+"\nEntre com a palavra a se verificada: ");
 				palavra = s1.next();
-				System.out.println("**********************************************");
+				System.out.println("**************************************************");
 				
 				//Metodo responsavel pela chegagem, recebe a String inserida pelo usuário(A palavra) e o alfabeto como parametros
 				if(VerificaPalavra(palavra,alf)){
@@ -197,7 +197,8 @@ e0,e1
 	
 	//Metodo responsavel pela chegagem
 	private static boolean VerificaPalavra(String palavra, String [] alf) { //RETORNO TRUE OU FALSE
-		System.out.println("\n****Metodo verificador de palavras\n");
+		System.out.println("\n\n**********************************************");
+		System.out.println("\n****Metodo verificador de palavras pertencentes ao alfabeto\n");
 		int cont = 0;
 		for(int x = 0 ; x < palavra.length(); x++){ //for é incrementado até o tamanho da palavra inserida pelo usuario
 			String l = ""+palavra.charAt(x); //String l recebe cada caracter digitados e entre eles palavra vazia
@@ -210,7 +211,9 @@ e0,e1
 				}
 			}
 		}
-		System.out.println("\n****FIM DO Metodo verificador de palavras\n\n");
+		System.out.println("\n****FIM DO Metodo verificador de palavras");
+		System.out.println("\n\n**********************************************\n\n");
+		
 		if(cont == palavra.length()){ // caso o contador seja = ao tamanho da palavra isso significa que ela esta contida nesse alfabeto
 			return true;
 		}else{
@@ -219,12 +222,13 @@ e0,e1
 		
 	}
 
-	//
-	private static void PalavraAceita(String EP, String[] estFin) {//Recebe EI como estado atual e estFim como os estados finais definidos élo usuário
-		
+	//Metodo para definir se a palavra é aceita pelo automato segundo as regras de transicao
+	private static void PalavraAceita(String EP, String[] estFin) {//Recebe EI como estado atual e estFim como os estados finais definidos pelo usuário
+		System.out.println("\n\n**********************************************");
+		System.out.println("\n****Inicio do medodo verificador de palavras do automato(Segundo as regras de transicao)\n\n");
 		int x = 0;
-		for(int i = 0 ; i < estFin.length ; i++){
-			if(EP .equals(estFin[i])){
+		for(int i = 0 ; i < estFin.length ; i++){//for é incrementado até a quantidade de estados finais definidas
+			if(EP .equals(estFin[i])){ //Se estado de partida(Estado inicial no momento) for igual ao estado final na posicao i x recebe valor 1
 				x = 1;
 			}
 		}
@@ -236,7 +240,8 @@ e0,e1
 			//JOptionPane.showMessageDialog(null, "Palavra não foi aceita\n\n");
 			System.out.println("\nPalavra não foi Aceita\n\n");
 		}
-		
+		System.out.println("\n****FIM  do medodo verificador de palavras do automato(Segundo as regras de transicao)");
+		System.out.println("\n\n**********************************************\n\n");
 	}
 
 	 
