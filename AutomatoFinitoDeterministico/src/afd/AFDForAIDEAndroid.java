@@ -2,7 +2,7 @@
 import java.util.*;
 //https://pt.wikipedia.org/wiki/Aut%C3%B4mato_finito_determin%C3%ADstico
 
-/*Definição Formal[editar | editar código-fonte]
+/*Definição Formal
 Um Autômato Finito Determinístico A é uma 5-tuple (ou quíntupla), (Q, Σ, δ, q0, F) consistindo de:
 um conjunto finito de símbolos de entrada chamado Alfabeto (Σ)
 um conjunto finito de estados (Q)
@@ -15,7 +15,7 @@ r0 = q0
 ri+1 = δ(ri, ai+1), para i = 0, ..., n−1
 rn ∈ F.
 Em outras palavras, a primeira condição afirma que a máquina se inicia no estado inicial q0. A segunda condição diz que, dado cada
-símbolo da entrada w, a máquina transita de estado em estado de acordo com a função de transição δ. A terceira e última condição diz 
+símbolo da entrada w, a máquina transita de estado em estado de acordo com a função de transição δ. A terceira e última condição diz
 que a máquina aceita w se somente se o último símbolo da entrada leva o autômato a parar em um estado f tal que f ∈ F. Caso contrário, 
 diz-se que a máquina rejeita a entrada. O conjunto de cadeias que M aceita é chamado Linguagem reconhecida por M e é simbolicamente 
 representado por L(M).
@@ -40,8 +40,9 @@ e0 --->>> q0 Estado Inicial
 e0,e1 --->>> F Conjunto de estados Finais
  * 
  * */
-
-/*Conteúdo do arquivo entradaAutomato.txt //para android não será utilizado
+ 
+//para IDE no android não será utilizado, caso queira utilizar crie o arquivo txt com so dados abaixo e descomente as linhas 52, 53 ,54, 57, 66, 67, 71, 72, 73
+/*Conteúdo do arquivo entradaAutomato.txt 
 a,b
 e0,e1
 e0,a=e0:e0,b=e1:e1,b=e1
@@ -62,7 +63,7 @@ e0,e1
 	
 	public static void main(String[] args) {
 		
-		//File file = new File("C:\\Users\\Anderson\\workspace\\JavaPassoAPasso\\AutomatoFinitoDeterministico\\src\\afd/entradaAutomato.txt"); // Arquivo de entrada está anexado
+		//File file = new File("C:\\Users\\seu_usuario_desktop\\desktop/entradaAutomato.txt"); // Arquivo de entrada está anexado
 		//try{
 			
 			// Leitura e separação do arquivo
@@ -70,8 +71,9 @@ e0,e1
 			//FileReader fr = new FileReader(file);
 			//BufferedReader br = new BufferedReader(fr);//Objeto fr passado como parametro para o contrutor da classe BufferedReader
 			//bufferedreader serve pra ler de entrada de dados, desde teclado, passando por arquivos e até sockets...
-				System.out.println("ESTE CODIGO AO SER EXECUTADO DEVE SER ACOMPANHADO PASSO A PASSO JUNTO AO CODIGO!");
-		
+			System.out.println("ESTE CODIGO AO SER EXECUTADO DEVE SER ACOMPANHADO PASSO A PASSO JUNTO AO CODIGO!\n\n");
+			System.out.println("ENTRADAS AUTOMATICAS DO PROGRAMA:\nAlfabeto: a,b \nEstados: e0,e1 \nFuncao de transicao: e0,a=e0:e0,b=e1:e1,b=e1 \nEstado inicial: e0 \nEstados finais: e0,e1\n\n\n");
+			System.out.println("***************************************");
 			Scanner s1 = new Scanner(System.in);
 			
 			String alfabeto = "a,b"; //br.readLine();//.readLine serve para Ler Strings digitadas. Leu a,b
@@ -81,16 +83,16 @@ e0,e1
 			String estadosFinais = "e0,e1"; //br.readLine();// Leu e0,e1
 			
 			String [] alf = DividirEConquistar(alfabeto); // Array alf recebe os caracteres separados a,b 
-			System.out.println("O Valor do Array alf é: "+ Arrays.toString(alf));
+			System.out.println("O Valor do Array alf(que armazena alfabeto) é: "+ Arrays.toString(alf));
 			
 			String [] est = DividirEConquistar(estados); //Array est recebe os dois estados possiveis e0,e1
-			System.out.println("O Valor do Array est é: "+ Arrays.toString(est));
+			System.out.println("O Valor do Array est(que armazena estados) é: "+ Arrays.toString(est));
 			
 			String [] estIn = DividirEConquistar(estadoInicial);//Array estIn recebe o estado  Inicial e0
-			System.out.println("O Valor do Array estIn é: "+ Arrays.toString(estIn));
+			System.out.println("O Valor do Array estIn(que armazena estado Inicial) é: "+ Arrays.toString(estIn));
 			
 			String [] estFin = DividirEConquistar(estadosFinais);//Array estFin recebe os estados finais e0,e1
-			System.out.println("O Valor do Array estFin é: "+ Arrays.toString(estFin)+"\n\n");
+			System.out.println("O Valor do Array estFin(que armazena estados finais) é: "+ Arrays.toString(estFin)+"\n\n");
 			
 			String [] funcaoPro = DivideTransicao(funcaoPrograma);
 			/*Array funcaoPro recebe as funcoes de transisao e0,a=e0:e0,b=e1:e1,b=e1, as divide e coloca as em posisoes 
@@ -98,35 +100,36 @@ e0,e1
 			*o exemplo anterior representa as posicoes do vetor. 
 			*/
 			//Caso queira saber o tamanho ou o conteúdo do Array funcaoPro DESCOMENTE as linhas abaixo
-			System.out.println("O tamanho do Array funcaoPro é: "+funcaoPro.length);
-			System.out.println("O Valor do Array funcaoPro é: "+ Arrays.toString(funcaoPro)+"\n\n");
+			System.out.println("O tamanho do Array funcaoPro(que armazena fun trans dividida, qts funcs existem) é: "+funcaoPro.length);
+			System.out.println("O Valor do Array funcaoPro(que armazena fun trans dividida) é: "+ Arrays.toString(funcaoPro)+"\n\n");
 		
 			//Arrays para armazenarem os estados
 			String [] ED = new String[funcaoPro.length];//Estado de Destino -  o tamnho é definido pela quantidades de transicoes, o delta
-			System.out.println("O Valor do Array ED é: "+ Arrays.toString(ED));
+			System.out.println("O tamanho do Array ED(estado de destino)=qtd de transicoes, é: "+ funcaoPro.length +" - Seus valores inicialmente são: "+Arrays.toString(ED));
 			
 			String [] EP = new String[funcaoPro.length];//Estado de Partida -  o tamnho é definido pela quantidades de transicoes, o delta
-			System.out.println("O Valor do Array EP é: "+ Arrays.toString(EP));
+			System.out.println("O tamanho do Array EP(Estado de Partida)=qtd de transicoes, é: "+ funcaoPro.length +" - Seus valores inicialmente são: "+Arrays.toString(EP));
 			
 			String [] EA = new String[funcaoPro.length];//Estado de Alfabetos -  o tamnho é definido pela quantidades de transicoes, o delta
-			System.out.println("O Valor do Array EA é: "+ Arrays.toString(EA)+"\n\n");
-		
+			System.out.println("O Valor do Array EA(Estado de Alfabetos)=qtd de transicoes, é: "+ funcaoPro.length +" - Seus valores inicialmente são: "+Arrays.toString(EA) +"\n\n");
+			System.out.println("********************************************");
+			System.out.println("TRANSICOES DE ESTADO::::\n\n");
 			//LAÇOS PARA TRATAR OS ESTADOS DE DESTINO, PARTIDA E ALFABETOS QUE ESTÃO CONTIDOS NA STRING funcaoPro
 			for(int i = 0;i<funcaoPro.length;i++){
 				String[] p1 = funcaoPro[i].split("=");
-				System.out.println("O Valor do Array p1 é: "+ Arrays.toString(p1));
+				System.out.println("Os valores do Array p1 sao: "+ Arrays.toString(p1));
 				
 				ED[i] = p1[1];
-				System.out.println("O Valor do Array ED["+i+"] é: "+ ED[i]);
+				System.out.println("Os valores do Array ED["+i+"] são: "+ ED[i]);
 				
 				String[] p2 = p1[0].split(",");
-				System.out.println("O Valor do Array p2 é: "+ Arrays.toString(p2));
+				System.out.println("Os valores do Array p2 sao: "+ Arrays.toString(p2));
 				
 				EP[i] = p2[0];
-				System.out.println("O Valor do Array EP["+i+"] é: "+ EP[i]);
+				System.out.println("Os valor do Array EP["+i+"] sao: "+ EP[i]);
 				
 				EA[i] = p2[1];
-				System.out.println("O Valor do Array EA["+i+"] é: "+ EA[i]+"\n\n");
+				System.out.println("Os valores do Array EA["+i+"] sao: "+ EA[i]+"\n\n");
 			}
 			
 			//Pegando entrada
