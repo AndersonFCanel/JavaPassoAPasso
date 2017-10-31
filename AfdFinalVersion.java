@@ -64,13 +64,13 @@ class Main {
 
 //IMPRIMINDO ENTRADAS
 		System.out.println("\n\n*************************************");
-		System.out.println("\nIMPRIMINDO ENTRADAS DO AUTOMATO\nM = (Q, Σ, δ, q0, F)");
-		System.out.println("O alfabeto:\nOs estados:\nOs conjunto dos estados de transisao:\nO  estIninicia:\nO  estFinal: ");
-		System.out.println("Σ = "+ Arrays.toString(alf));
-		System.out.println("Q = "+ Arrays.toString(est));
-		System.out.println("δ = "+ Arrays.toString(funcDelta));		
+		System.out.println("\nIMPRIMINDO ENTRADAS DO AUTOMATO\n");
+		System.out.println("O alfabeto: Σ \nOs estados: Q = {S1, S2...}\nAs transisaos: (δ : Q × Σ → Q)\nO  estIninicia: q0\nO conjunto dos estados finais: F\nM = (Q, Σ, δ, q0, F)");
+		System.out.println("Σ  = "+ Arrays.toString(alf));
+		System.out.println("Q  = "+ Arrays.toString(est));
+		System.out.println("δ  = "+ Arrays.toString(funcDelta));		
 		System.out.println("q0 = "+ Arrays.toString(estIn));
-		System.out.println("F = : "+ Arrays.toString(estFin)+"\n");
+		System.out.println("F  = "+ Arrays.toString(estFin)+"\n");
 		System.out.println("*************************************\n");
 		
 
