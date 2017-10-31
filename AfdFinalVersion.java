@@ -26,7 +26,7 @@ class Main {
 		String [] est = splitVirgula(estados); //Array est recebe os dois estados possiveis e0,e1
 
 
-//ENTRADA FUNCAO DE TRANSICAO
+//ENTRADA FUNCAO DE TRANSICAO  --->>>!!!CORRIGIR!!!
 		String delta ,auxDelta = "e0,a;e1:e1,m;e2:e2,o;e3:e3,r;e3";//"e0,a;e0:e1,a;e1:e0,b;e1:e1,b;e1";
 		//String [] funcDelta = new String[alf.length*est.length];// = DivideTransicao(delta);
 		//int c=0;
@@ -42,7 +42,8 @@ class Main {
 //			auxDelta=delta+":";
 //			//funcDelta[c]=delta;
 //		}
-		
+		//auxDelta.replaceAll("[^0-9]||[^,]||[^;]","");
+		 
 		String [] funcDelta = DivideTransicao(auxDelta);
 
 
@@ -76,12 +77,11 @@ class Main {
 
 //----------------------------------------------------------------------
 //TRATANDO OS DADOS INSERIDOS, COLOCANDO AS ENTRADAS DO USUARIO EM ARRAYS
-
-		String [] ED = new String[funcDelta.length];//Estado de Destino -  o tamnho é definido pela quantidades de transicoes, o delta
+		
 		String [] EP = new String[funcDelta.length];//Estado de Partida -  o tamnho é definido pela quantidades de transicoes, o delta
-		String [] EA = new String[funcDelta.length];//Estado de Alfabetos -  o tamnho é definido pela quantidades de transicoes, o delta
-
-
+		String [] EA = new String[funcDelta.length];//Caracter consumido -  o tamnho é definido pela quantidades de transicoes, o delta
+		String [] ED = new String[funcDelta.length];//Estado de Destino -  o tamnho é definido pela quantidades de transicoes, o delta
+		
 
 //LACOS PARA TRATAR OS ESTADOS DE DESTINO, PARTIDA E ALFABETOS QUE ESTAO CONTIDOS NA STRING funcDelta
 		
@@ -101,17 +101,36 @@ class Main {
 			EA[i] = p2[1];
 		//	System.out.println("O Valor do Array EA["+i+"] é: "+ EA[i]+"\n\n");
 		}
+		
 //----------------------------------------------------------------------
-//IMPRIMINDO TABELA DE TRANCISAO DE ESTADOS
+//IMPRIMINDO TABELA DE TRANCISAO DOS ESTADOS UTILIZADOS
 		System.out.println("\n\n\tTABELA DE TRANSICAO DE ESTADOS");
 		System.out.println("O estado de partida - EP é: "+ Arrays.toString(EP));
 		System.out.println("O caracter consumido -EA é: "+ Arrays.toString(EA));
 		System.out.println("O estado de destino - ED é: "+ Arrays.toString(ED)+"\n");
 		System.out.println("*************************************\n\n");
 		
-
+		//IMPRIMINDO TABELA DE TRANSICAO DE ESTADOS COMPLETA    ----->>>!!!!IMPLEMENTAR!!!!!
+		/*
+		String[][] tabTran = new String[est.length][alf.length];
+        for(int linha=0; linha < tabTran.length; linha++){
+            for(int coluna=0; coluna < tabTran[0].length; coluna++){
+                System.out.print(tabTran [linha] [coluna]+" ");
+            }
+        	System.out.println(" ");
+        }
+        
+        for(int linha=0; linha < tabTran.length; linha++){
+            for(int coluna=0; coluna < tabTran[0].length; coluna++){
+                System.out.print(tabTran [linha] [coluna]+" ");
+            }
+        	System.out.println(" ");
+        }
+      System.out.println("\n\n");
+		*/	
+		
 //----------------------------------------------------------------------
-//
+//INSERINDO A QUANTIDADE DE PALAVRAS A SEREM VERIFICADAS PELO AUTOMATO
 	//	System.out.println("Quantas palavras deseja testar no automato? ");
 	//	int qtdPalavras = s.nextInt
 	//	for(int i=0 ; i <qtdPalavras ; i++){
@@ -123,11 +142,16 @@ class Main {
 //Entrada de dados - palavra
 			String palavra = null;
 			System.out.println("\n\n**********************************************");
-			System.out.println("\nEntre com a palavra a se verificada: ");
+			System.out.println("Entre com a palavra a ser verificada\nPARA SAIR DIGITE S ");
 			palavra = s.next();
+//FORÇAR SAIDA	
+			if(palavra.equals("S")||palavra.equals("s")){
+				System.out.println("**********************************************");
+				break;
+			}
 			System.out.println("**********************************************");
 
-
+//----------------------------------------------------------------------
 			if(VerificaPalavra(palavra,alf)){
 				boolean flag = false; //flag serve para controlar o if que determinara  em que condicao a abertura das janelas "aceito" e "naÃµ pertence devem ocorrer.
 
@@ -157,7 +181,7 @@ class Main {
 				}
 
 				if(flag){
-					System.out.println("\nSimbolo digitado não pertence ao alfabeto informado!\n\n");
+					System.out.println("\nPalavra não aceita pelo automato!\n\n");
 				}else{
 					PalavraAceita(EI,estFin); // Verifica se o estado final pertence a um dos estados finais
 				}
@@ -165,7 +189,7 @@ class Main {
 
 			}else{
 				//JOptionPane.showMessageDialog(null,"Palavra nao pode ser verificada pelo automato!\n\n");
-				System.out.println("\nPalavra nao pode ser verificada pelo automato!\n\n");
+				System.out.println("\nPalavra nao pode ser verificada pelo automato!\nSIMBOLO INEXISTENTE NO ALFABETO\n\n");
 			}
 
 		}
