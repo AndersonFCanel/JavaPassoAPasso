@@ -152,6 +152,8 @@ class Main {
 			System.out.println("**********************************************");
 
 //----------------------------------------------------------------------
+		String simbolInvalid = null;
+		
 			if(VerificaPalavra(palavra,alf)){
 				boolean flag = false; //flag serve para controlar o if que determinara  em que condicao a abertura das janelas "aceito" e "naÃµ pertence devem ocorrer.
 
@@ -167,11 +169,12 @@ class Main {
 
 							EI = ED[y];
 							System.out.println("O valor de ED["+y+"] é: "+ED[y]);
-
+							
 							monitora++; 
 							System.out.println("Monitora foi incrementado, seu novo valor é: "+monitora);
 						}
 					}
+					
 					if(monitora == 0){
 						flag = true;
 						System.out.println("Monitora NÃƒO foi incrementado, seu  valor é: "+monitora);
@@ -189,7 +192,8 @@ class Main {
 
 			}else{
 				//JOptionPane.showMessageDialog(null,"Palavra nao pode ser verificada pelo automato!\n\n");
-				System.out.println("\nPalavra nao pode ser verificada pelo automato!\nSIMBOLO INEXISTENTE NO ALFABETO\n\n");
+				System.out.println("\nPalavra nao pode ser verificada pelo automato!\nSIMBOLO INEXISTENTE NO ALFABETO!!\n\n");
+				System.out.println("SIMBOLO:   "+simbolInvalid);
 			}
 
 		}
