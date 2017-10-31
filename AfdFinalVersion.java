@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 //import javax.swing.JOptionPane;
@@ -11,24 +10,24 @@ class Main {
 
 		Scanner s = new Scanner(System.in);
 		
-		System.out.println("AUTOMATO FINITO DETERMINISTICO");
+		System.out.println("AUTOMATO FINITO DETERMINISTICO\n\n");
 
 //ENTRADA ALAFABETO
-		String alfabeto = "a,b"; 
-		System.out.println("Entre com o alafabeto:\nCada caracter deve ser separado por virgula.\nEX: a,b,c,d,e");
+		String alfabeto = "a,m,o,r";//"a,b"; 
+		System.out.println("Entre com o alfabeto Σ:\nCada caracter deve ser separado por virgula.\nEX: a,b,c,d,e");
 		//alfabeto = s.nextLine();
 		String [] alf = splitVirgula(alfabeto); // Array alf recebe os caracteres separados [a,b] 
 
 
 //ENTRADA ESTADOS
-		String estados = "e0,e1";
-		System.out.println("\nEntre com os estados:\nCada estado deve ser separado por virgula.\nEX: q0,q1,q2");
+		String estados = "e0,e1,e2,e3";
+		System.out.println("\nEntre com o conjunto de estados Q:\nCada estado deve ser separado por virgula.\nEX: q0,q1,q2");
 		//estados = s.nextLine();
 		String [] est = splitVirgula(estados); //Array est recebe os dois estados possiveis e0,e1
 
 
 //ENTRADA FUNCAO DE TRANSICAO
-		String delta ,auxDelta = "e0,a;e0:e1,a;e1:e0,b;e1:e1,b;e1";
+		String delta ,auxDelta = "e0,a;e1:e1,m;e2:e2,o;e3:e3,r;e3";//"e0,a;e0:e1,a;e1:e0,b;e1:e1,b;e1";
 		//String [] funcDelta = new String[alf.length*est.length];// = DivideTransicao(delta);
 		//int c=0;
 
@@ -57,71 +56,73 @@ class Main {
 
 
 //ENTRADA CONJUNTO DE ESTADOS FINAIS
-		String estadosFinais = "e0,e1";
+		String estadosFinais = "e3";//"e0,e1";
 		System.out.println("\nEntre com o conjunto dos estados finais:\nCada estado deve ser separado por virgula.\nEX: q0,q1,q2");
 		String [] estFin = splitVirgula(estadosFinais);//Array estFin recebe os estados finais e0,e1
 		//estadosFinais = s.nextLine();
 
 
 //IMPRIMINDO ENTRADAS
-		System.out.println("*************************************");
-		System.out.println("\n\nIMPRIMINDO ENTRADAS");
-		System.out.println("O alfabeto: "+ Arrays.toString(alf));
-		System.out.println("Os estados: "+ Arrays.toString(est));
-		System.out.println("Os estados de transisao sao: "+ Arrays.toString(funcDelta)+"\n\n");		
+		System.out.println("\n\n*************************************");
+		System.out.println("\nIMPRIMINDO ENTRADAS");
+		System.out.println("O alfabeto: Σ"+ Arrays.toString(alf));
+		System.out.println("Os estados: Q"+ Arrays.toString(est));
+		System.out.println("Os conjunto dos estados de transisao e δ: "+ Arrays.toString(funcDelta));		
 		System.out.println("O  estIninicial é: "+ Arrays.toString(estIn));
-		System.out.println("O  estFinal é: "+ Arrays.toString(estFin)+"\n\n");
-		
+		System.out.println("O  estFinal é: "+ Arrays.toString(estFin)+"\n");
 		System.out.println("*************************************\n");
 		
 
-		//----------------------------------------------------------------------
-
-
-
+//----------------------------------------------------------------------
 //TRATANDO OS DADOS INSERIDOS, COLOCANDO AS ENTRADAS DO USUARIO EM ARRAYS
+
 		String [] ED = new String[funcDelta.length];//Estado de Destino -  o tamnho é definido pela quantidades de transicoes, o delta
 		String [] EP = new String[funcDelta.length];//Estado de Partida -  o tamnho é definido pela quantidades de transicoes, o delta
 		String [] EA = new String[funcDelta.length];//Estado de Alfabetos -  o tamnho é definido pela quantidades de transicoes, o delta
 
 
 
-		System.out.println("O estado de destino - ED é: "+ Arrays.toString(ED));
-		System.out.println("O estado de partida - EP é: "+ Arrays.toString(EP));
-		System.out.println("O estado anterior - EA é: "+ Arrays.toString(EA)+"\n\n");
-
 //LACOS PARA TRATAR OS ESTADOS DE DESTINO, PARTIDA E ALFABETOS QUE ESTAO CONTIDOS NA STRING funcDelta
 		
 		for(int i = 0;i<funcDelta.length;i++){
 			String[] p1 = funcDelta[i].split(";");
-			System.out.println("A funcao de transicao o DELTA: "+ Arrays.toString(p1));
+			System.out.println("A  transicao numero "+i+" e: "+ Arrays.toString(p1));
 
 			ED[i] = p1[1];
-			System.out.println("O estado de destino - ED["+i+"] e: "+ ED[i]);
+		//	System.out.println("O estado de destino - ED["+i+"] e: "+ ED[i]);
 
 			String[] p2 = p1[0].split(",");
-			System.out.println("O Valor do Array p2 é: "+ Arrays.toString(p2));
+		//	System.out.println("O Valor do Array p2 é: "+ Arrays.toString(p2));
 
 			EP[i] = p2[0];
-			System.out.println("O Valor do Array EP["+i+"] é: "+ EP[i]);
+		//	System.out.println("O Valor do Array EP["+i+"] é: "+ EP[i]);
 
 			EA[i] = p2[1];
-			System.out.println("O Valor do Array EA["+i+"] é: "+ EA[i]+"\n\n");
+		//	System.out.println("O Valor do Array EA["+i+"] é: "+ EA[i]+"\n\n");
 		}
+//----------------------------------------------------------------------
+//IMPRIMINDO TABELA DE TRANCISAO DE ESTADOS
+		System.out.println("\n\n\tTABELA DE TRANSICAO DE ESTADOS");
+		System.out.println("O estado de partida - EP é: "+ Arrays.toString(EP));
+		System.out.println("O caracter consumido -EA é: "+ Arrays.toString(EA));
+		System.out.println("O estado de destino - ED é: "+ Arrays.toString(ED)+"\n");
+		System.out.println("*************************************\n\n");
+		
 
-		System.out.println("O estado de destino - ED é: "+ Arrays.toString(ED));
-		System.out.println("O estado de partida EP é: "+ Arrays.toString(EP));
-		System.out.println("O estado anterior EA é: "+ Arrays.toString(EA)+"\n\n");
-
-		//Pegando entrada
+//----------------------------------------------------------------------
+//
+	//	System.out.println("Quantas palavras deseja testar no automato? ");
+	//	int qtdPalavras = s.nextInt
+	//	for(int i=0 ; i <qtdPalavras ; i++){
+		
+		
 		while(true){
-			String EI = estadoInicial;//String EI recebe e0
-			System.out.println("O Valor da String EI é: "+ EI);
-
-			String palavra = null;//String para armazenar o dado da janela JOptionPane
-			//palavra = JOptionPane.showInputDialog("InformaÃ§Ãµes--- \n\n Alfabeto: {"+alfabeto+"}\nEstados: {"+estados+"} \n\nEntre com uma palavra: ");
+			String EI = estadoInicial;
+			System.out.println("O estado  inicial atual e: "+ EI);
+//Entrada de dados - palavra
+			String palavra = null;
 			System.out.println("\n\n**********************************************");
-			System.out.println("O alfabeto é: "+alfabeto+"\nOs estados: "+estados+"\nEntre com a palavra a se verificada: ");
+			System.out.println("\nEntre com a palavra a se verificada: ");
 			palavra = s.next();
 			System.out.println("**********************************************");
 
@@ -137,7 +138,7 @@ class Main {
 					for(int y = 0 ; y <ED.length ; y++){
 						if(l .equals(EA[y]) && EI .equals(EP[y])){ 
 							/*Se o valor de l for igual ao de EA[y] e EI[y]*/
-							System.out.println("O valor de EI é: "+EI);
+							System.out.println("o estado  inicial atual e: "+EI);
 
 							EI = ED[y];
 							System.out.println("O valor de ED["+y+"] é: "+ED[y]);
@@ -146,30 +147,31 @@ class Main {
 							System.out.println("Monitora foi incrementado, seu novo valor é: "+monitora);
 						}
 					}
-					if(monitora == 0){//Se nenhuma das vezes os if acima forem verdadeiros entÃ£o
+					if(monitora == 0){
 						flag = true;
 						System.out.println("Monitora NÃƒO foi incrementado, seu  valor é: "+monitora);
 						System.out.println("O valor de flag é : "+flag);
-						break; // Interrompe o laco aqui mais interno qui.
+						break; 
 					}
 				}
 
-				if(flag){/*Caso tenha sido atendida a condicao do if anterior serÃ¡ impresso. variavel flag tera valor verdadeiro*/
-					//JOptionPane.showMessageDialog(null,"Palavra nÃ£o pertence ao alfabeto!\n\n");
-					System.out.println("\nPalavra nÃ£o pertence ao alfabeto!\n\n");
-				}else{/*Caso nÃ£o tenha sido atendida sera feita uma nova verificacao. */
+				if(flag){
+					System.out.println("\nSimbolo digitado não pertence ao alfabeto informado!\n\n");
+				}else{
 					PalavraAceita(EI,estFin); // Verifica se o estado final pertence a um dos estados finais
 				}
 
 
 			}else{
-				//JOptionPane.showMessageDialog(null,"Palavra nÃ£o pertence ao alfabeto!\n\n");
-				System.out.println("\nPalavra nÃ£o pertence ao alfabeto!\n\n");
+				//JOptionPane.showMessageDialog(null,"Palavra nao pode ser verificada pelo automato!\n\n");
+				System.out.println("\nPalavra nao pode ser verificada pelo automato!\n\n");
 			}
 
 		}
 
 	}
+	
+//}
 //--------------------METODOS---------------------------
 
 	private static boolean VerificaPalavra(String palavra, String [] alf) {
