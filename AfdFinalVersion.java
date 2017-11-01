@@ -1,58 +1,71 @@
 
 import java.util.*;
 
-import javax.swing.JOptionPane;
-
-
-public class AFDVersaoFinal {
+class Main {
 	public static void main(String[] args) {
 		
 		Scanner s = new Scanner(System.in);
 		linhaAst();
 		System.out.println("AUTOMATO FINITO DETERMINISTICO - AFD");
 		linhaAst();
-		System.out.println("\n\n");
+		System.out.println("");
 
 		//ENTRADA ALAFABETO
 		String alfabeto = "a,m,o,r";//"a,b"; 
-		System.out.println("Entre com o alfabeto Σ:\nCada caracter deve ser separado por virgula.\nEX: a,b,c,d,e");
+		//System.out.println("Entre com o alfabeto Σ:\nCada caracter deve ser separado por virgula.\nEX: a,b,c,d,e");
 		//alfabeto = s.nextLine();
 		String [] alf = splitVirgula(alfabeto); // Array alf recebe os caracteres separados [a,b] 
 
 		//ENTRADA ESTADOS
 		String estados = "e0,e1,e2,e3";
-		System.out.println("\nEntre com o conjunto de estados Q:\nCada estado deve ser separado por virgula.\nEX: q0,q1,q2");
+		//System.out.println("\nEntre com o conjunto de estados Q:\nCada estado deve ser separado por virgula.\nEX: q0,q1,q2");
 		//estados = s.nextLine();
 		String [] est = splitVirgula(estados); //Array est recebe os dois estados possiveis e0,e1
 
 		//ENTRADA FUNCAO DE TRANSICAO  --->>>!!!CORRIGIR!!!
-		String delta ,auxDelta = "e0,a;e1:e1,m;e2:e2,o;e3:e3,r;e3";//"e0,a;e0:e1,a;e1:e0,b;e1:e1,b;e1";
-		//String [] funcDelta = new String[alf.length*est.length];// = DivideTransicao(delta);
-		//int c=0;
+		String delta =null ;//,auxDelta = null; //"e0,a;e1:e1,m;e2:e2,o;e3:e3,r;e3";//"e0,a;e0:e1,a;e1:e0,b;e1:e1,b;e1";
+		String [] funcDeltaAux = new String[alf.length*est.length];// = DivideTransicao(delta);
+		
+		int c=0, cont1=0;
+					for1:
+					for(c=0;c<(alf.length*est.length);c++) {
+						System.out.println("\nEntre com as transições (δ : Q × Σ → Q):\nCada transicao deve ser separada por virgula e ponto e virgula.\nEX: \"q0,a;q0 : q0,b;q1 : q1,b;q1\"");
+						delta = s.nextLine();
+		
+						if(delta.equals("s")) {
+							break for1 ;
+						}
+						funcDeltaAux[c]=delta;
+						cont++;
+					}
 
-		//			for1:
-		//			for(c=0;c<(alf.length*est.length);c++) {
-		//				System.out.println("\nEntre com as transições (δ : Q × Σ → Q):\nCada transicao deve ser separado por virgula e ponto e virgula.\nEX: \"q0,a;q0 : q0,b;q1 : q1,b;q1\"");
-		//				delta = s.nextLine();
-		//
-		//				if(delta.equals("s")) {
-		//					break for1 ;
-		//				}
-		//				auxDelta=delta+":";
-		//				//funcDelta[c]=delta;
-		//			}
+					//String [] funcDelta = Arrays.copyOf(funcDeltaAux,funcDeltaAux.length);
+					//String [] funcDelta = funcDeltaAux.clone();
+					
+					int [] b = new int[a.length];                //primeiro é preciso reservar espaço para b
+					for (int i=0; i < a.length; i++) b[i]=a[i];  //agora podemos copiar
+		
+						//(3) exibe o conteúdo de "b" 
+							for (int i=0; i < a.length; i++) {
+							System.out.println("b[" + i + "]=" + b[i]);
+							}
+				
+					
+//----------------------------------------------------------------------
+
 		//auxDelta.replaceAll("[^0-9]||[^,]||[^;]","");
-		String [] funcDelta = DivideTransicao(auxDelta);
+		System.out.println("Aux Delta: "+delta);
+		//String [] funcDelta = DivideTransicao(auxDelta);
 
 		//ENTRADA ESTADO INICIAL
 		String estadoInicial = "e0"; 
-		System.out.println("\nEntre com o estado inicial q0: ");
+		//System.out.println("\nEntre com o estado inicial q0: ");
 		//estadosInicial = s.nextLine();
 		String [] estIn = splitVirgula(estadoInicial);//Array estIn recebe o estado  Inicial e0
 
 		//ENTRADA CONJUNTO DE ESTADOS FINAIS
 		String estadosFinais = "e3";//"e0,e1";
-		System.out.println("\nEntre com o conjunto dos estados finais F:\nCada estado deve ser separado por virgula.\nEX: q0,q1,q2");
+		//System.out.println("\nEntre com o conjunto dos estados finais F:\nCada estado deve ser separado por virgula.\nEX: q0,q1,q2");
 		String [] estFin = splitVirgula(estadosFinais);//Array estFin recebe os estados finais e0,e1
 		//estadosFinais = s.nextLine();
 
@@ -169,24 +182,24 @@ public class AFDVersaoFinal {
 	//IMPRIME ENTRADAS
 	private static void imprimirEntradas(String[] alf, String[] est, String[] funcDelta, String[] estIn, String[] estFin){
 		System.out.println("\n\t*************************************");
-		System.out.println("\t\nIMPRIMINDO ENTRADAS DO AUTOMATO\n");
-		System.out.println("\tO alfabeto: Σ \nOs estados: Q = {S1, S2...}\nAs transicoes: (δ : Q × Σ → Q)\nO  estIninicia: q0\nO conjunto dos estados finais: F\nM = (Q, Σ, δ, q0, F)");
+		System.out.println("\tIMPRIMINDO ENTRADAS DO AUTOMATO\n");
+		System.out.println("\tO alfabeto: Σ \n\tOs estados: Q = {S1, S2...}\n\tAs transicoes: (δ : Q × Σ → Q)\n\tO  estIninicia: q0\n\tO conjunto dos estados finais: F\n\tM = (Q, Σ, δ, q0, F)");
 		System.out.println("\tΣ  = "+ Arrays.toString(alf));
 		System.out.println("\tQ  = "+ Arrays.toString(est));
 		System.out.println("\tδ  = "+ Arrays.toString(funcDelta));		
 		System.out.println("\tq0 = "+ Arrays.toString(estIn));
 		System.out.println("\tF  = "+ Arrays.toString(estFin)+"\n");
-		System.out.println("*****************************************\n");
+		System.out.println("\t*************************************");
 	}
 
 	//IMPRIME TABELA DE TRANSICAO ATUAL 
 	private static void imprimeTabela(String[]estadoPartida, String[] caracConsumido, String[] estadoDestino){
-		System.out.println("\n**********************************************************");
+		System.out.println("\n\t*************************************************");
 		System.out.println("\tTABELA DE TRANSICAO DE ESTADOS UTILIZADOS");
 		System.out.println("\tO estado de partida - estadoPartida: "+ Arrays.toString(estadoPartida));
 		System.out.println("\tO caracter consumido -caracConsumido: "+ Arrays.toString(caracConsumido));
 		System.out.println("\tO estado de destino - estadoDestino: "+ Arrays.toString(estadoDestino)+"\n");
-		System.out.println("***********************************************************\n\n");
+		System.out.println("\t**************************************************\n\n");
 	}
 
 	//ENTRAR PALAVRA
