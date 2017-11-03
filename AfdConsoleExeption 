@@ -1,1 +1,531 @@
-Java
+//tratar entradas iguais e invalidas
+
+//JOptionPane.showInputDialog(null,
+//JOptionPane.showMessageDialog(null, );
+//verificar letras iguais/entradas invalidas
+//Orientar a objeto
+//Tratar formato da entrada
+
+import java.util.*;
+
+//iport org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+class Main {
+
+	public static void main(String[] args) {
+
+		Scanner s = new Scanner(System.in);
+		System.out.println("AUTOMATO FINITO DETERMINISTICO - AFD");
+
+		//ENTRADA ALAFABETO
+		String alfabeto ; 
+		boolean validAlf = false;
+
+		alfabeto=entrarAlf();
+		validAlf = verificaAlf(alfabeto);
+
+		while(validAlf) {
+			alfabeto=entrarAlf();
+			validAlf = verificaAlf(alfabeto);
+
+			if (validAlf) {
+				System.out.println("TENTE NOVAMENTE!");
+			}else {
+				entradaValidada(); 
+			}
+		}
+
+		String [] alfArray = splitVirgula(alfabeto); // Array alf recebe os caracteres separados [a,b] 
+
+
+		//ENTRADA DO CONJUNTO DE  ESTADOS
+		String estados = "q0,q1,q2,q3";
+		boolean validEst;
+
+		estados=entraEst();
+		validEst = verificaEst(estados);
+
+		while(validEst) {
+			estados=entraEst();
+			validEst = verificaEst(estados);
+
+			if (validAlf) {
+				System.out.println("TENTE NOVAMENTE!");
+			}
+		}
+
+		String [] estArray = splitVirgula(estados); //Array est recebe os dois estados possiveis e0,e1
+
+
+		//ENTRADA FUNCAO DE TRANSIÇÃO
+		String delta =null ;
+		String [] funcDeltaAux = new String[alfArray.length*estArray.length];// = DivideTransicao(delta);
+		boolean valFunc = false;
+		int c=0, cont1=0;
+		tutorialTransicao();
+
+		valFunc = checkFunc(delta, alfArray, estArray, cont1, funcDeltaAux);
+		while(valFunc) {
+			delta=entraFunc();
+			valFunc = checkFunc(delta, alfArray, estArray, cont1, funcDeltaAux);
+
+			if (valFunc) {
+				entradaInvalida();
+			}
+		}
+
+		String [] funcDelta = new String[cont1];                
+		for (c=0; c < cont1; c++){
+			//System.out.println("b[" + i + "]=" + b[i]);
+			funcDelta[c]=funcDeltaAux[c];
+		}
+		//----------------------------------------------------------------------
+
+		//ENTRADA ESTADO INICIAL
+		String estadoInicial;// = "q0"; 
+		System.out.println("\nEntre com o estado inicial q0: ");
+		estadoInicial= s.nextLine();
+		String [] estIn = splitVirgula(estadoInicial);//Array estIn recebe o estado  Inicial e0
+
+		//ENTRADA CONJUNTO DE ESTADOS FINAIS
+		String estadosFinais;
+		System.out.println("\nEntre com o conjunto dos estados finais F:\nCada estado deve ser separado por virgula.\nEX: q0,q1,q2");
+		estadosFinais= s.nextLine();
+		String [] estFin = splitVirgula(estadosFinais);//Array estFin recebe os estados finais e0,e1
+
+
+
+		//IMPRIMINDO ENTRADAS
+		imprimirAutomato(alfArray, estArray, funcDelta, estIn, estFin);
+
+
+		//----------------------------------------------------------------------
+		//TRATANDO OS DADOS INSERIDOS, COLOCANDO AS ENTRADAS DO USUARIO EM ARRAYS
+		//Estados de partida, caracter consumido e destino
+		String [] estadoPartida = new String[funcDelta.length];
+		String [] caracConsumido = new String[funcDelta.length];
+		String [] estadoDestino = new String[funcDelta.length];
+
+		//TRATANDO funcDelta
+		for(int i = 0;i<funcDelta.length;i++){
+			String[] p1 = funcDelta[i].split(";");
+			String[] p2 = p1[0].split(",");
+			estadoPartida[i] = p2[0];
+			caracConsumido[i] = p2[1];
+			estadoDestino[i] = p1[1];
+
+			//IMRIMINDO 			
+			System.out.println("\nCOMO VOCE MODELOU O AUTOMATO"
+							   + "O caracter da vez e: "+ caracConsumido[i]
+							   +"\nA  transicao numero "+i+" e: "+ Arrays.toString(p1)
+							   +"\nO estado de partida: "+ estadoPartida[i]
+							   +"\nEstado: "+p2[0]+" consome caracter :"+ p2[1]
+							   +"\nO estado de destino: "+ estadoDestino[i]);
+		}
+
+		System.out.println("");
+		//----------------------------------------------------------------------
+		//IMPRIMINDO TABELA DE TRANSICAO DOS ESTADOS UTILIZADOS
+		imprimeTabela(estadoPartida, caracConsumido, estadoDestino);
+
+		//IMPRIMINDO TABELA DE TRANSICAO DE ESTADOS COMPLETA    ----->>>!!!!IMPLEMENTAR!!!!!
+		/*
+		 String[][] tabTran = new String[est.length][alf.length];
+		 for(int linha=0; linha < tabTran.length; linha++){
+		 for(int coluna=0; coluna < tabTran[0].length; coluna++){
+		 System.out.print(tabTran [linha] [coluna]+" ");
+		 }
+		 System.out.println(" ");
+		 }
+
+		 for(int linha=0; linha < tabTran.length; linha++){
+		 for(int coluna=0; coluna < tabTran[0].length; coluna++){
+		 System.out.print(tabTran [linha] [coluna]+" ");
+		 }
+		 System.out.println(" ");
+		 }
+		 System.out.println("\n\n");
+		 */	
+
+		//----------------------------------------------------------------------
+
+		while(true){
+			String EI = estadoInicial;
+			//ENTRADA DA PALAVRA
+			String palavra = null;
+			palavra= entrarPalavra();
+			if(palavra.equalsIgnoreCase("I")) {
+				imprimirAutomato(alfArray, estArray, funcDelta, estIn, estFin);
+			}
+			if(palavra.equals("S")||palavra.equals("s")){
+				break;
+			}
+
+
+
+			//----------------------------------------------------------------------
+			String simbolInvalid = null;
+
+			if(VerificaPalavra(palavra,alfArray)){
+				boolean flag = false; 
+				for(int x = 0 ; x <palavra.length() ; x++){ 
+					String caracPalavra = ""+palavra.charAt(x); 	
+					int flag2 = 0;
+					for(int y = 0 ; y <estadoDestino.length ; y++){
+						if(caracPalavra.equals(caracConsumido[y]) && EI .equals(estadoPartida[y])){ 
+							EI = estadoDestino[y];
+							flag2++; 
+						}
+					}
+
+					if(flag2 == 0){
+						flag = true;
+						break; 
+					}
+				}
+
+				if(flag){
+					System.out.println("\nPalavra não aceita pelo automato!\n\n");
+				}else{
+					PalavraAceita(EI,estFin); // Verifica se o estado final pertence a um dos estados finais
+				}
+
+
+			}else{
+				//System.out.println("Palavra nao pode ser verificada pelo automato!\n\n");
+				System.out.println("\nPalavra nao pode ser verificada pelo automato!\nSIMBOLO INEXISTENTE NO ALFABETO!!\n\n");
+				System.out.println("SIMBOLO:   "+simbolInvalid);
+			}
+
+		}
+
+	}
+
+	//--------------------METODOS---------------------------
+	//IMPRIME ENTRADAS
+	private static void imprimirAutomato(String[] alf, String[] est, String[] funcDelta, String[] estIn, String[] estFin){
+		System.out.println("*****************************************\n"
+						   + "\tIMPRIMINDO ENTRADAS DO AUTOMATO\n\n"
+						   + "\tO alfabeto: Σ \n\tOs estados: Q = {S1, S2...}\n\tAs transicoes: (δ : Q × Σ → Q)\n\tO  estIninicia: q0\n\tO conjunto dos estados finais: F\n\tM = (Q, Σ, δ, q0, F)\n"
+						   + "\tΣ   = "+ Arrays.toString(alf)+"\n"
+						   + "\tQ   = "+ Arrays.toString(est)+"\n"
+						   + "\tδ   = "+ Arrays.toString(funcDelta)+"\n"
+						   + "\tq0 = "+ Arrays.toString(estIn)+"\n"
+						   + "\tF   = "+ Arrays.toString(estFin)+"\n"
+						   + "*****************************************");
+	}
+
+	//IMPRIME TABELA DE TRANSICAO ATUAL 
+	private static void imprimeTabela(String[]estadoPartida, String[] caracConsumido, String[] estadoDestino){
+		System.out.println("\t*************************************************\n"
+						   + "\tTABELA DE TRANSICAO DE ESTADOS UTILIZADOS\n\n"
+						   + "\tO estado de partida:  "+ Arrays.toString(estadoPartida)+"\n"
+						   + "\tO caracter consumido:  "+ Arrays.toString(caracConsumido)+"\n"
+						   + "\tO estado de destino:  "+ Arrays.toString(estadoDestino)+"\n"
+						   + "\t**************************************************");
+	}
+
+
+	//ENTRADA INVALIDA 
+	private static void entradaInvalida() {
+		System.out.println("ENTRADA INVALIDA\n");
+
+	}
+
+	//ENTRADA VALIDA
+	private static void entradaValidada() {
+		System.out.println("Entrada VERIFICADA\n");
+	}
+
+
+	//ENTRA ESTADO
+	private static String entraEst() {
+		Scanner s3 = new Scanner(System.in);
+		String estados;
+		System.out.println("ATENÇÃO AO MODELO DE INSERÇÃO NO CONJUNTO DE ESTADOS\nCada estado deve ser "
+						   + "separado por virgula SEM USO DE ESPAÇO!\n"
+						   + "EX: q0,q1,q2");
+		System.out.println("Entre com o conjunto de estados Q:");
+		estados =s3.nextLine();
+		return estados;
+	}
+
+
+
+	//ENTRA ALFABETO
+	private static String entrarAlf(){
+		Scanner s = new Scanner(System.in);
+		String alfabeto;
+		System.out.println("Entre com o alfabeto Σ:\n"
+						   + "Cada caracter deve ser separado por virgula.\nEX: a,b,c,d,e\n");
+		alfabeto= s.nextLine();
+		return alfabeto;
+	}
+
+	//ENTRAR PALAVRA
+	private static String entrarPalavra(){
+		Scanner s = new Scanner(System.in);
+		String palavra;
+		Scanner s1= new Scanner(System.in);
+		System.out.println("Entre com a palavra a ser verificada pelo AFD:\n"
+						   + "CASO QUEIRA SAIR, DIGITE 'S'\n"
+						   + "CASO QUEIRA IMPRIMIR O AUTOMATO DIGITE 'I' \n"
+						   + " ");
+		palavra = s1.nextLine();
+		return palavra;
+	}
+
+	//TUTORIAL DE ENTRADA PARA FUNÇAO DE TRANSIÇÃO
+	private static void tutorialTransicao() {
+		System.out.println("ATENÇÃO AO MODELO DE INSERÇÃO DE TRANSIÇÃO DE ESTADOS\n"
+						   + "PASSO 1: Primeiro entre com o estado inicial - EX: q0\n"
+						   + "PASSO 2: DIGITE UMA VIRGULA \",\"\n"
+						   + "PASSO 3: Entre com o caracter a ser consumido pelo estado inicial - EX: a\n"
+						   + "PASSO 4: DIGITE PONTO E VIRGULA. \";\"\n"
+						   + "PASSO 5: Entre com o estado de destino - EX: q1\n"
+						   + "PASSO 6: APERTE ENTER\n"
+						   + "A entrada deve estar da forma do exemplo abaixo\n"
+						   + "EX: q0,a;q1");
+	}
+
+	//FUNÇAO INVALIDA
+	private static void funcInval(String delta) {
+		System.out.println("Sua entrada esta fora do modelo\n");
+		tutorialTransicao();
+	}
+
+	//VERIFICADOR DE ENTRADA DE DADOS PARA O ALFABETO
+	private static boolean verificaAlf(String alfabeto) {
+		boolean validador = false;
+
+		//ENTRADA VAZIA 
+		try {
+			if(alfabeto.equals(null)){
+			}
+		}catch (Exception e) {
+			entradaInvalida();
+			return validador=true;
+		}
+
+		if(alfabeto.equals("")||alfabeto.length()<1){
+			System.out.println("Tamanho do alfabeto inferior ao permitido!");
+			entradaInvalida();
+			return validador=true;
+		}
+
+		if(alfabeto.charAt(0)==','){
+			System.out.println("Não começe a inserção pela virgula");
+			entradaInvalida();
+			return validador = true;
+		}
+
+		System.out.println(alfabeto + " :"+alfabeto.length());
+		int w=1;
+		for1:
+		for(int k = 0; k<alfabeto.length(); k=k+2) {
+			if(k==alfabeto.length()||w==alfabeto.length()) {
+				break for1;
+			}
+			if(alfabeto.charAt(w)!=',') {
+				entradaInvalida();
+				return validador=true;
+			}
+			w=w+2;
+			for (int j=k+2; j<alfabeto.length(); j=j+2) {
+				if(alfabeto.charAt(k)==alfabeto.charAt(j) ) {
+					entradaInvalida();
+					System.out.println("Você entrou com caracteres iguais no alfabeto!\n"
+									   +alfabeto.charAt(k)+" = "+alfabeto.charAt(j));
+					return validador =true;
+				}
+			}
+
+		}
+		entradaValidada();
+		return validador;
+	}
+
+	//VERIFICADOR DE ENTRADA DE DADOS PARA O CONJUNTO DE ESTADOS
+	private static boolean verificaEst(String estados) {
+		boolean validador = false;
+
+		try {
+			if(estados.equals(null)){
+			}
+		}catch (Exception e) {
+			entradaInvalida();
+			return validador=true;
+		}
+
+		if(estados.length()<1||estados.equals("")) {
+			entradaInvalida();
+			System.out.println("Tamanho minimo nao preenchido");
+			return validador = true;
+		}
+
+
+		ValidadorDeEstados:
+		for(int w = 2; w<estados.length(); w=w+3) {
+			
+//			if(w == estados.length()) {
+//				break;
+//			}
+
+			validarVirgulaEstadoAte9Estados:
+			if(estados.length()<=29) {
+				if(estados.charAt(w)!=',') {
+					entradaInvalida();
+					System.out.println("Entrada de virgula fora da posiçao");
+					return validador=true;
+					//w=estados.length();
+				}else {
+					entradaValidada();
+					return validador = false;
+				}
+			}
+			validarVirgulaEstadoAcima10Estados:
+			if(estados.length()>=30) {
+				w++;
+				if(estados.charAt(w)!=',') {
+					entradaInvalida();
+					System.out.println("Entrada de virgula fora da posiçao");
+					return validador=true;
+					//w=estados.length();
+				}else {
+					entradaValidada();
+					return validador = false;
+				}
+			}
+
+		}
+		System.out.println("Entrada VERIFICADA");
+		return validador;
+	}
+
+	//ENTRADA DA FUNÇÃO DE TRANSIÇÃO
+	private static String entraFunc() {
+		String delta ;
+		Scanner s2 = new Scanner(System.in);
+		System.out.println("\nEntre com as transições (δ : Q × Σ → Q):\n"
+						   + "\nVER TUTORIAL NOVAMENTE DIGITE 'C'"
+						   + "\nPARA SAIR DIGITE 'S'"
+						   + "\nVER ENTRADAS ANTERIORES 'A'\n"
+						   + " ");
+		delta = s2.nextLine();
+		return delta;
+	}
+
+	//VALIDAÇÃO DA FUNÇÃO
+	private static boolean checkFunc(String delta, String[] alfArray,String[] estArray, int cont1,String[] funcDeltaAux) {
+		boolean validador = false;
+		int c;
+
+		for1:
+		for(c=0;c<(alfArray.length*estArray.length);c++) {
+			delta=entraFunc();
+			try {
+				if(delta.equals(null)){
+				}
+			}catch (Exception e) {
+				entradaInvalida();
+				c--;
+				continue for1;
+			}
+//				if(delta.equals(null)||delta.equals("")) {
+//					entradaInvalida();
+//					c--;
+//					continue for1;
+//				}
+
+			sair:
+			if(delta.equalsIgnoreCase("S")){
+				break for1;
+			}
+
+
+			tutorial:
+			if(delta.equalsIgnoreCase("C")) {
+				tutorialTransicao();
+				c--;
+				continue for1;
+			}
+
+			anteriores:
+			if(delta.equalsIgnoreCase("A")){
+				System.out.println("Suas entradas anteriores\n"+Arrays.toString(funcDeltaAux));
+				c--;
+
+				//continue inserindoFuncTrans;
+				continue for1;
+			}
+
+			tamanho:
+			if(delta.length()<7 || delta.length()>7) {
+				funcInval(delta);
+				c--;
+
+				continue for1;
+			}
+
+			validadorDeVirgulaEPtEVirgula:
+			if(delta.charAt(2)!=','||delta.charAt(4)!=';') {
+				funcInval(delta);
+				c--;
+				delta=null;
+				continue for1;
+
+			}
+		}
+		funcDeltaAux[c]=delta;
+		cont1++;
+		return false;	
+	}
+
+	//VERIFICA ENTRADA DE PALAVRAS
+	private static boolean VerificaPalavra(String palavra, String [] alf) {
+
+		int cont = 0;
+		for(int x = 0 ; x < palavra.length(); x++){
+			String caracPalavra = ""+palavra.charAt(x);
+			for(int y = 0 ; y < alf.length ; y++){
+				if(caracPalavra.equals(alf[y])){
+					cont++;
+				}
+			}
+		}
+
+		if(cont == palavra.length()){
+			return true;
+		}else{
+			return false;
+		}
+
+	}
+
+
+	//METODO PARA VERIFICAR A ACEITACAO DA PALAVRA PELO AUTOMATO
+	private static void PalavraAceita(String estadoPartida, String[] estFin) {
+
+		int x = 0;
+		for(int i = 0 ; i < estFin.length ; i++){
+			if(estadoPartida .equals(estFin[i])){
+				x = 1;
+			}
+		}
+
+		if(x == 1){
+			//JOptionPane.showMessageDialog(null, "Palavra Aceita\n\n");
+			System.out.println("Palavra Aceita pelo automato!!!\n\n");
+		}else{
+			//JOptionPane.showMessageDialog(null, "Palavra nÃ£o foi aceita\n\n");
+			System.out.println("Palavra nao foi Aceita pelao automato!!!\n\n");
+		}
+
+	}
+
+	//SPLIT
+	private static String[] splitVirgula(String valor) {
+		return valor.split(",");//Divide a String quando ocorrer ","
+	}
+
+
+}
