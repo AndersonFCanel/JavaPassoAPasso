@@ -76,19 +76,49 @@ class Main {
 		String estadoInicial;// = "q0"; 
 		System.out.println("\nEntre com o estado inicial q0: ");
 		estadoInicial= s.nextLine();
+		
+		//***************CRIAR ESSES MÉTODOS---------!!!!!!!!!!!!
+		/* 
+		estadoInicial=entraEstIn();
+		validEstIn = verificaEstIn(estadoInicial);
+
+		while(validEstIn) {
+			estadoInicial=entraEstIn();
+			validEstIn = verificaEstIn(estadoInicial);
+
+			if (validEstIn) {
+				System.out.println("TENTE NOVAMENTE!");
+			}
+		}
+		*/
+		
 		String [] estIn = splitVirgula(estadoInicial);//Array estIn recebe o estado  Inicial e0
 
 		//ENTRADA CONJUNTO DE ESTADOS FINAIS
 		String estadosFinais;
 		System.out.println("\nEntre com o conjunto dos estados finais F:\nCada estado deve ser separado por virgula.\nEX: q0,q1,q2");
 		estadosFinais= s.nextLine();
-		String [] estFin = splitVirgula(estadosFinais);//Array estFin recebe os estados finais e0,e1
+		
+		//***************CRIAR ESSES MÉTODOS---------!!!!!!!!!!!!
+		/* 
+		estadosFinais=entraEstFim();
+		validEstFim = verificaEstIn(estadosFinais);
 
+		while(validEstFim) {
+			estadosFinais=entraEstFim();
+			validEstFim = verificaEstFim(estadosFinais);
+
+			if (validEstFim) {
+				System.out.println("TENTE NOVAMENTE!");
+			}
+		}
+		*/
+		
+		String [] estFin = splitVirgula(estadosFinais);//Array estFin recebe os estados finais e0,e1
 
 
 		//IMPRIMINDO ENTRADAS
 		imprimirAutomato(alfArray, estArray, funcDelta, estIn, estFin);
-
 
 		//----------------------------------------------------------------------
 		//TRATANDO OS DADOS INSERIDOS, COLOCANDO AS ENTRADAS DO USUARIO EM ARRAYS
@@ -152,8 +182,6 @@ class Main {
 				break;
 			}
 
-
-
 			//----------------------------------------------------------------------
 			String simbolInvalid = null;
 
@@ -216,7 +244,6 @@ class Main {
 						   + "\t**************************************************");
 	}
 
-
 	//ENTRADA INVALIDA 
 	private static void entradaInvalida() {
 		System.out.println("ENTRADA INVALIDA\n");
@@ -227,7 +254,6 @@ class Main {
 	private static void entradaValidada() {
 		System.out.println("Entrada VERIFICADA\n");
 	}
-
 
 	//ENTRA ESTADO
 	private static String entraEst() {
@@ -240,8 +266,6 @@ class Main {
 		estados =s3.nextLine();
 		return estados;
 	}
-
-
 
 	//ENTRA ALFABETO
 	private static String entrarAlf(){
@@ -350,7 +374,7 @@ class Main {
 
 		if(estados.length()<1||estados.equals("")) {
 			entradaInvalida();
-			System.out.println("Tamanho minimo nao preenchido");
+			System.out.println("Tamanho minimo nao preenchido!");
 			return validador = true;
 		}
 
@@ -366,7 +390,7 @@ class Main {
 			if(estados.length()<=29) {
 				if(estados.charAt(w)!=',') {
 					entradaInvalida();
-					System.out.println("Entrada de virgula fora da posiçao");
+					System.out.println("Entrada de virgula fora da posiçao!");
 					return validador=true;
 					//w=estados.length();
 				}else {
@@ -445,7 +469,6 @@ class Main {
 			if(delta.equalsIgnoreCase("A")){
 				System.out.println("Suas entradas anteriores\n"+Arrays.toString(funcDeltaAux));
 				c--;
-
 				//continue inserindoFuncTrans;
 				continue for1;
 			}
@@ -492,7 +515,6 @@ class Main {
 		}
 
 	}
-
 
 	//METODO PARA VERIFICAR A ACEITACAO DA PALAVRA PELO AUTOMATO
 	private static void PalavraAceita(String estadoPartida, String[] estFin) {
