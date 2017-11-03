@@ -1,11 +1,3 @@
-//tratar entradas iguais e invalidas
-
-//JOptionPane.showInputDialog(null,
-//JOptionPane.showMessageDialog(null, );
-//verificar letras iguais/entradas invalidas
-//Orientar a objeto
-//Tratar formato da entrada
-
 import java.util.*;
 
 //iport org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
